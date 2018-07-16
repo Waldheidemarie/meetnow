@@ -1,0 +1,168 @@
+/* ======General====== */
+
+.App{
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    grid-template-rows: 2.5rem auto 2.5rem;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #FFF;
+    font-weight: bold;
+}
+
+a:active {
+    text-decoration: underline;
+}
+
+/* =======Navbar========= */
+.navbar{
+    grid-column: 1 / -1;
+}
+
+.navbar button{
+    width: 7rem;
+    height: 2rem;
+    border-radius: .5rem;
+    border: 2px solid #000;
+    margin-top: .5rem;
+    margin-left: 15rem;
+}
+
+.navbar button:hover{
+    cursor: pointer;
+    background-color: green;
+    border-color: yellow;
+    color: yellow;
+    font-weight: bold;
+}
+
+.navbar ul {
+    float: right;
+    padding-right: 2.5rem;
+}
+
+.navbar div{
+    float: left;
+    margin-left: 1.2rem;
+    padding-top: .7rem;
+}
+
+.navbar li{
+    display: inline;
+    padding-top: .7rem;
+    margin: 0 .7rem;  
+}
+
+.navbar,
+.footer{
+    padding-left: 2rem;
+}
+
+/* =======Meeting List====== */
+
+.meeting-list{
+    grid-column: 2 / span 14;
+}
+
+.meeting-list, 
+.meeting-activities{
+    padding-top: .8rem;
+}
+
+.meeting{
+    width: 98.5%;
+    height: 20rem;
+    border-radius: .2rem;
+    margin-bottom: .7rem;
+    background-color: #FFF;
+    border: 1.5px solid #CCC;
+}
+
+.meeting img{
+    border-radius: 50%;
+    float: left;
+    margin-right: 1rem;
+    padding: 0 0 0 .7rem;
+}
+
+.m-title{
+    margin-bottom: 2rem;
+}
+
+.m-time{
+    padding: .7rem 0 .7rem 0.7rem;
+    border-top: .5px solid #DDD;
+    border-bottom: .5px solid #DDD;
+    color: #AAA;
+}
+
+.m-time span{
+    margin-right: 1rem;
+}
+
+.m-attendee{
+    height: 3rem;
+    border-bottom: .5px solid #DDD;
+    background-color: #EFEFEF;
+    margin: 0;
+    padding: .7rem;
+    list-style: none;
+}
+
+.m-text{
+    padding: 0 .7rem .7rem .7rem;
+}
+
+.m-text p{
+    margin-bottom: 0;
+    color: #AAA;
+}
+
+.m-text button{
+    width: 7rem;
+    height: 2rem;
+    background-color: #006BA6;
+    color: #FFF;
+    border-radius: .5rem;
+    border: 2px solid #000;
+    margin-top: .5rem;
+    margin-left: 15rem;
+}
+
+.m-text button:hover{
+    cursor: pointer;
+    background-color: #0496FF;
+    border-color: #000;
+    color: #000;
+    font-weight: bold;
+}
+
+/* ======Meeting Activities====== */
+
+.meeting-activities{
+    grid-column:  17 / span 7;
+}
+
+/* ======Footer====== */
+
+.footer{
+    grid-column: 1 / -1;
+    background-color: #3B475A;
+    color: #FFF;
+    text-align: center;
+    opacity: 0.8;
+}
+
+/* ======Media Queries====== */
+
+
