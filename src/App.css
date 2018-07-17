@@ -24,18 +24,31 @@ a:active {
     text-decoration: underline;
 }
 
+button, img{
+    max-width: 100%;
+}
+
 /* =======Navbar========= */
 .navbar{
     grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(22, 1fr);
+    background-color: skyblue;
+}
+
+.navbar-brand{
+    grid-column: 2 / span 4;
+    margin-left: 1.2rem;
+    padding-top: .7rem;
 }
 
 .navbar button{
+    grid-column: 6 / span 3;
     width: 7rem;
     height: 2rem;
     border-radius: .5rem;
     border: 2px solid #000;
-    margin-top: .5rem;
-    margin-left: 15rem;
+    margin-top: .2rem;
 }
 
 .navbar button:hover{
@@ -46,26 +59,11 @@ a:active {
     font-weight: bold;
 }
 
-.navbar ul {
-    float: right;
-    padding-right: 2.5rem;
-}
-
-.navbar div{
-    float: left;
-    margin-left: 1.2rem;
-    padding-top: .7rem;
-}
-
-.navbar li{
-    display: inline;
-    padding-top: .7rem;
-    margin: 0 .7rem;  
-}
-
-.navbar,
-.footer{
-    padding-left: 2rem;
+.navbar-ul {
+    grid-column: 17 / -2;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    list-style: none;
 }
 
 /* =======Meeting List====== */
@@ -86,20 +84,29 @@ a:active {
     margin-bottom: .7rem;
     background-color: #FFF;
     border: 1.5px solid #CCC;
-}
-
-.meeting img{
-    border-radius: 50%;
-    float: left;
-    margin-right: 1rem;
-    padding: 0 0 0 .7rem;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 6rem 2rem 4rem 8rem;
 }
 
 .m-title{
-    margin-bottom: 2rem;
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.m-host{
+    grid-column: 1 / span 1;
+    margin-right: 1rem;
+    padding: .7rem 0 0 .7rem;
+}
+
+.m-header{
+    grid-column: 2 / -1;
 }
 
 .m-time{
+    grid-column: 1 / -1;
     padding: .7rem 0 .7rem 0.7rem;
     border-top: .5px solid #DDD;
     border-bottom: .5px solid #DDD;
@@ -111,6 +118,9 @@ a:active {
 }
 
 .m-attendee{
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
     height: 3rem;
     border-bottom: .5px solid #DDD;
     background-color: #EFEFEF;
@@ -119,24 +129,34 @@ a:active {
     list-style: none;
 }
 
+.m-attendee img{
+    margin-right: 1rem;
+    padding: 0 0 0 .7rem;
+}
+
 .m-text{
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 5.5rem 2.5rem;
     padding: 0 .7rem .7rem .7rem;
+    
 }
 
 .m-text p{
+    grid-column: 1 / -1;
     margin-bottom: 0;
     color: #AAA;
 }
 
 .m-text button{
+    grid-column: 4 / 5;
     width: 7rem;
     height: 2rem;
     background-color: #006BA6;
     color: #FFF;
     border-radius: .5rem;
     border: 2px solid #000;
-    margin-top: .5rem;
-    margin-left: 15rem;
 }
 
 .m-text button:hover{
@@ -161,8 +181,44 @@ a:active {
     color: #FFF;
     text-align: center;
     opacity: 0.8;
+    padding-left: 2rem;
 }
 
 /* ======Media Queries====== */
 
+@media screen and (max-width: 468px) {
+    body{
+        font-size: 8px;
+    }
+    .App{
+        display: block;
+    }
 
+    .meeting-activities{
+        display: none;
+    }
+} 
+
+/* Extra small devices (phones, 600px and down) */
+@media screen and (max-width: 600px) {
+    body{
+        font-size: 70%;
+    }
+
+    .App{
+        display: block;
+    }
+
+    .meeting-activities{
+        display: none;
+    }
+} 
+
+/* Small devices (portrait tablets and large phones, 600px and up) 
+@media screen and (min-width: 600px) {...} */
+
+/* Medium devices (landscape tablets, 768px and up) 
+@media screen and (min-width: 768px) {...} */
+
+/* Large devices (laptops/desktops, 992px and up) 
+@media screen and (min-width: 992px) {...} */

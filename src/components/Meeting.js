@@ -7,7 +7,7 @@ const Meeting = () => {
         <div className="meeting">
 
             <section className="m-title">
-                <img src="https://randomuser.me/api/portraits/med/men/43.jpg" alt="host" />
+                <img className="m-host" src="https://randomuser.me/api/portraits/med/men/43.jpg" alt="host" />
                 <div className="m-header">
                     <h3>New Business Workshop</h3>
                     <p>Hosted by <strong>John Doe</strong></p>
