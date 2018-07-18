@@ -250,6 +250,10 @@ button, img{
     border: 2px solid #000;
 }
 
+.f-buttons button:hover{
+   cursor: pointer;
+}
+
 .btn-submit{
     background-color: green;
     margin-right: .2rem;

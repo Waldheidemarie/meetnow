@@ -19,7 +19,7 @@ const Meeting = ({ meeting }) => {
                 <span><FontAwesomeIcon icon={faMapMarkerAlt} />  {meeting.venue}</span>
             </section>
             <ul className="m-attendee">
-                {meeting.attendees.map(attendee => {
+                {meeting.attendees && meeting.attendees.map(attendee => {
                     return <li key={attendee.id}><img src={attendee.photoURL} alt={attendee.name} /></li>
                 })}
             </ul>

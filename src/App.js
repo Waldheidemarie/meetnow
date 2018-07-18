@@ -27,13 +27,18 @@ class App extends Component {
 
   addMeeting = (e) => {
     console.log('e addMeeting in App.js', e.target);
-    const { isFormOpen } = this.state;
     e.preventDefault();
     this.setState({ isFormOpen: true });
   }
 
-  updateMeeting = () => {
-    console.log('meeting id to update ' );
+  updateMeetings = (newMeeting) => {
+    console.log('updating meeting .... ');
+    const { meetings } = this.state;
+    let updatedMeetings = [...meetings, newMeeting];
+    this.setState({ 
+      meetings: updatedMeetings,
+      isFormOpen: false
+     });
   }
 
   render() {
@@ -47,7 +52,7 @@ class App extends Component {
           <Route path='/meetings' render={() => <MeetingList meetings={meetings} />} />
           <Route path='/meetings/:id' render={() => <MeetingDetails />} />
           {isFormOpen
-            ? <MeetingForm />
+            ? <MeetingForm updateMeetings={this.updateMeetings}/>
             : <MeetingActivity />
           }
           <Footer />
