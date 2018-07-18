@@ -4,7 +4,7 @@
     height: 100vh;
     display: grid;
     grid-template-columns: repeat(24, 1fr);
-    grid-template-rows: 2.5rem auto 2.5rem;
+    grid-template-rows: 3.5rem auto 20rem;
 }
 
 a:link {
@@ -33,6 +33,7 @@ button, img{
     grid-column: 1 / -1;
     display: grid;
     grid-template-columns: repeat(22, 1fr);
+    grid-template-rows: 2.5rem 1rem;
     background-color: skyblue;
 }
 
@@ -66,6 +67,12 @@ button, img{
     list-style: none;
 }
 
+.nav-2{
+    grid-column: 1 / -1;
+    background-color: #006BA6;
+    border-bottom: 2px solid #FFF;
+}
+
 /* =======Meeting List====== */
 
 .meeting-list{
@@ -73,7 +80,8 @@ button, img{
 }
 
 .meeting-list, 
-.meeting-activities{
+.meeting-activities,
+.m-form{
     padding-top: .8rem;
 }
 
@@ -83,7 +91,7 @@ button, img{
     border-radius: .2rem;
     margin-bottom: .7rem;
     background-color: #FFF;
-    border: 1.5px solid #CCC;
+    border: 1.5px solid #DDD;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 6rem 2rem 4rem 8rem;
@@ -123,21 +131,23 @@ button, img{
     grid-template-columns: repeat(12, 1fr);
     height: 3rem;
     border-bottom: .5px solid #DDD;
-    background-color: #EFEFEF;
+    background-color: #006BA6;
+    background-color: #CCC;
     margin: 0;
     padding: .7rem;
     list-style: none;
 }
 
 .m-attendee img{
-    margin-right: 1rem;
-    padding: 0 0 0 .7rem;
+    margin: 0 3.5rem 3.5rem 0;
+    padding: 1px;
+    border: .5px solid #FFF;
 }
 
 .m-text{
     grid-column: 1 / -1;
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(15, 1fr);
     grid-template-rows: 5.5rem 2.5rem;
     padding: 0 .7rem .7rem .7rem;
     
@@ -150,41 +160,107 @@ button, img{
 }
 
 .m-text button{
-    grid-column: 4 / 5;
-    width: 7rem;
+    width: 3.5rem;
     height: 2rem;
-    background-color: #006BA6;
     color: #FFF;
     border-radius: .5rem;
     border: 2px solid #000;
 }
 
-.m-text button:hover{
+.b-view{
+    grid-column: 12 / 13;
+    font-size: 1rem;
+    margin-right: .2rem;
+}
+
+.b-edit{
+    grid-column: 13 / 14;
+    font-size: 1rem;
+}
+
+.b-delete{
+    grid-column: 14 / 15;
+    margin-left: .2rem;
+}
+
+.m-text span:hover{
     cursor: pointer;
-    background-color: #0496FF;
-    border-color: #000;
-    color: #000;
     font-weight: bold;
 }
 
-/* ======Meeting Activities====== */
+.b-view:hover{
+    color: green;
+}
 
-.meeting-activities{
+.b-edit:hover{
+    color: blue;
+}
+
+.b-delete:hover{
+    color: maroon;
+}
+
+/* ====== Meeting Activities ====== */
+
+.meeting-activities,
+.m-form{
     grid-column:  17 / span 7;
 }
 
-/* ======Footer====== */
+/* ====== Footer ====== */
 
 .footer{
     grid-column: 1 / -1;
-    background-color: #3B475A;
-    color: #FFF;
     text-align: center;
     opacity: 0.8;
-    padding-left: 2rem;
+    background-color: #006BA6;
+    color: #FFF;
+    border-top: 2px solid #FFF;
 }
 
-/* ======Media Queries====== */
+/* ====== Meeting Form ====== */
+
+.m-form form {
+    width: 100%;
+    height: 18rem;
+    padding: 1rem;
+    border-radius: .2rem;
+    background-color: #FFF;
+    border: 1.5px solid #DDD;
+}
+
+.form-input input{
+    width: 100%;
+    height: 1.5rem;
+    margin-top: .5rem;
+    border: none;
+    border-bottom: 1px solid #DDD;
+}
+
+.form-input input:focus{
+    outline: none;
+    border-bottom: 2px solid #DDD;
+}
+
+.f-buttons button{
+    width: 3.5rem;
+    height: 2rem;
+    color: #FFF;
+    border-radius: .5rem;
+    border: 2px solid #000;
+}
+
+.btn-submit{
+    background-color: green;
+    margin-right: .2rem;
+}
+
+.btn-cancel{
+    background-color: maroon;
+}
+
+
+/* ====== Media Queries ====== */
 
 @media screen and (max-width: 468px) {
     body{
