@@ -4,10 +4,8 @@ export const getData = () => {
             id: "1",
             title: "New Business Workshop",
             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            host: {
-                name: "John Doe",
-                photoURL: "https://randomuser.me/api/portraits/med/men/43.jpg"
-            },
+            hostName: "John Doe",
+            hostPhotoURL: "https://randomuser.me/api/portraits/med/men/43.jpg",
             date: "2018-10-03",
             venue: "123 Main St, Brampton, ON",
             attendees: [
@@ -34,10 +32,8 @@ export const getData = () => {
             id: "2",
             title: "Hackathon Primer",
             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            host: {
-                name: "Thani Kaltungo",
-                photoURL: "https://randomuser.me/api/portraits/med/men/46.jpg"
-            },
+            hostName: "Thani Kaltungo",
+            hostPhotoURL: "https://randomuser.me/api/portraits/med/men/46.jpg",
             date: "2018-11-11",
             venue: "Hall 67, The Quadrangle, London, ON",
             attendees: [
@@ -59,10 +55,8 @@ export const getData = () => {
             id: "3",
             title: "ReactTO Annual General Meeting",
             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            host: {
-                name: "Chang Zen Li",
-                photoURL: "https://randomuser.me/api/portraits/med/men/47.jpg"
-            },
+            hostName: "Chang Zen Li",
+            hostPhotoURL: "https://randomuser.me/api/portraits/med/men/47.jpg",
             date: "2018-10-25",
             venue: "34, Finch St, Downtown Toronto, ON",
             attendees: [
@@ -99,10 +93,8 @@ export const getData = () => {
             id: "4",
             title: "Python Conference",
             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            host: {
-                name: "Guam Dialo",
-                photoURL: "https://randomuser.me/api/portraits/med/women/22.jpg"
-            },
+            hostName: "Guam Dialo",
+            hostPhotoURL: "https://randomuser.me/api/portraits/med/women/22.jpg",
             date: "2019-03-15",
             venue: "Hall 13, Multinational Conference Center, Boston, MA",
             attendees: [

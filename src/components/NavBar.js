@@ -6,7 +6,7 @@ class NavBar extends Component {
 
     handleOpenForm = (e) => {
         console.log('e in Navbar.js ', e.target);
-        this.props.addMeeting(e);
+        this.props.displayForm(e);
     }
 
     render(){
