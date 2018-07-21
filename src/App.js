@@ -42,14 +42,41 @@ class App extends Component {
   }
 
   updateMeetings = (newMeeting) => {
-    console.log('updating meeting .... ');
-    const { meetings } = this.state;
-      let updatedMeetings = [...meetings, newMeeting];
-      this.setState({ 
-        meetings: updatedMeetings,
-        isFormOpen: false
-       });
-    }
+      console.log('updating meeting .... ', newMeeting);
+      if(this.state.meetings.length && !newMeeting.id){
+        const { meetings } = this.state;
+        newMeeting.id = Date.now();
+        let updatedMeetings = [...meetings, newMeeting];
+        this.setState({ 
+          meetings: updatedMeetings,
+          isFormOpen: false
+        });
+      } else if (this.state.meetings.length && newMeeting.id){
+          const { meetings } = this.state;
+          this.setState({ 
+            meetings: meetings.map(m => {
+                if(m.id === newMeeting.id){
+                  return Object.assign({}, m, newMeeting);
+                }
+                return m;
+            }),
+            isFormOpen: false
+          });
+
+      }else{
+        const { meetings } = this.state;
+        this.setState({
+          meetings: [...meetings, newMeeting],
+          isFormOpen: false
+        });
+      }
+  }
+
+  deleteMeeting = (meetingId) => {
+      this.setState({
+        meetings: this.state.meetings.filter(meeting => meeting.id !== meetingId)
+      })
+  }
 
   render() {
     const { meetings, currMeeting, isFormOpen } = this.state;
@@ -59,7 +86,7 @@ class App extends Component {
       <div className="App">
         <NavBar displayForm={this.displayForm}/>
           <Route exact path='/' render={() => <Home />}/>
-        <Route path='/meetings' render={() => <MeetingList meetings={meetings} saveCurrMeeting={this.saveCurrMeeting} />} />
+        <Route path='/meetings' render={() => <MeetingList meetings={meetings} saveCurrMeeting={this.saveCurrMeeting} deleteMeeting={this.deleteMeeting} />} />
           <Route path='/meetings/:id' render={() => <MeetingDetails />} />
           {isFormOpen
             ? <MeetingForm updateMeetings={this.updateMeetings} currMeeting={currMeeting.id ? currMeeting : null }/>

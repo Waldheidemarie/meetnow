@@ -7,13 +7,17 @@ class MeetingList extends Component {
         this.props.saveCurrMeeting(meetingId);
     }
 
+    submitToDelete = (meetingId) => {
+        this.props.deleteMeeting(meetingId);
+    }
+
     render () {
         const { meetings } = this.props;
         return (
             <div className="meeting-list">
                 <h3>List of Meetings</h3>
                 { meetings.map(meeting => {
-                    return <Meeting meeting={meeting} key={meeting.id} submitCurrMeeting={this.submitCurrMeeting} />
+                    return <Meeting meeting={meeting} key={meeting.id} submitCurrMeeting={this.submitCurrMeeting} submitToDelete={this.submitToDelete} />
                   }) 
                 }
             </div>

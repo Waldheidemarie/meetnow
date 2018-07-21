@@ -19,8 +19,8 @@ class MeetingForm extends Component {
 
     componentDidMount() {
         if(this.props.currMeeting !== null){
-            const { title, date, venue, hostName } = this.props.currMeeting;
-            this.setState({ title,date,venue,hostName });
+            const { id, title, date, venue, hostName } = this.props.currMeeting;
+            this.setState({ id, title, date, venue, hostName });
         }
     }
 
@@ -28,7 +28,9 @@ class MeetingForm extends Component {
         console.log('next props', nextProps);
         if(nextProps.currMeeting === null){
             this.setState({ id: '',title: '',date: '',venue: '',hostName: ''})
-        } else if(((this.props.currMeeting && nextProps.currMeeting) && (this.props.currMeeting.id !== nextProps.currMeeting.id)) || (!this.props.currMeeting && nextProps.currMeeting)){
+        } else if(((this.props.currMeeting && nextProps.currMeeting) 
+                    && (this.props.currMeeting.id !== nextProps.currMeeting.id)) 
+                    || (!this.props.currMeeting && nextProps.currMeeting)){
             let { id, title, date, venue, hostName } = nextProps.currMeeting;
             this.setState({ id,title,date,venue,hostName });
         }
@@ -42,18 +44,17 @@ class MeetingForm extends Component {
         })
     }
     
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         console.log('new meeting', this.state);
         e.preventDefault();
-        let id = Date.now();
-        this.props.updateMeetings({id, ...this.state});
-        this.setState({
-            id: '',
-            title: '',
-            date: '',
-            venue: '',
-            hostName: ''
-        })
+        if(!this.state.id){
+            await this.props.updateMeetings({...this.state });
+            this.setState({ title: '',date: '',venue: '',hostName: ''});
+        }else{
+            let newMeeting = {...this.state};
+            await this.props.updateMeetings(newMeeting);
+            this.setState({ id: '', title: '', date: '', venue: '', hostName: '' });
+        }
     }
 
     render () {

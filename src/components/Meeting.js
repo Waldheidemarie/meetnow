@@ -14,6 +14,10 @@ class Meeting extends Component{
         this.props.submitCurrMeeting(meetingId);
     }
 
+    handleDelete = (meetingId) => {
+        this.props.submitToDelete(meetingId);
+    }
+
     render(){
         const { meeting } = this.props;
         console.log('meeting: ', meeting);
@@ -41,7 +45,7 @@ class Meeting extends Component{
                     <p>{meeting.description}</p>
                     <span className="b-view"><FontAwesomeIcon icon={faBookOpen} /></span>
                     <span className="b-edit" onClick={() => this.handleEdit(meeting.id)}><FontAwesomeIcon icon={faEdit} /></span>
-                    <span className="b-delete"><FontAwesomeIcon icon={faTrash} /></span>
+                    <span className="b-delete" onClick={() => this.handleDelete(meeting.id)}><FontAwesomeIcon icon={faTrash} /></span>
                 </section>
             </div>
         )
