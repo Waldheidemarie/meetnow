@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 
 class MeetingForm extends Component {
@@ -13,7 +11,7 @@ class MeetingForm extends Component {
             date: '',
             venue: '',
             hostName: '',
-            hostPhotoURL: <span><FontAwesomeIcon icon={faUser} /></span>
+            hostPhotoURL: "https://randomuser.me/api/portraits/men/91.jpg"
         } 
     }
 

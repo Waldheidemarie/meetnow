@@ -1,34 +1,25 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faClock, 
-        faMapMarkerAlt, 
-        faBookOpen, 
-        faEdit, 
-        faTrash 
+import {faClock,
+        faMapMarkerAlt,
+        faBookOpen,
+        faEdit,
+        faTrash
     } from '@fortawesome/free-solid-svg-icons';
 
 class Meeting extends Component{
 
-    handleEdit = (meetingId) => {
-        console.log('meeting id to edit', meetingId);
-        this.props.submitCurrMeeting(meetingId);
-    }
-
-    handleDelete = (meetingId) => {
-        this.props.submitToDelete(meetingId);
-    }
-
     render(){
-        const { meeting } = this.props;
+        const { meeting, showMeetingDetails, saveCurrMeeting, deleteMeeting } = this.props;
         console.log('meeting: ', meeting);
         return (
             <div className="meeting">
-    
+
                 <section className="m-title">
                     <img className="m-host" src={meeting.hostPhotoURL} alt="host" />
                     <div className="m-header">
-                        <h3>{meeting.title}</h3>
-                        <p>Hosted by <strong>{meeting.hostName}</strong></p>
+                        <h4>{meeting.title}</h4>
+                        <p>Host: <strong>{meeting.hostName}</strong></p>
                     </div>
                 </section>
                 <section className="m-time">
@@ -40,12 +31,12 @@ class Meeting extends Component{
                         return <li key={attendee.id}><img src={attendee.photoURL} alt={attendee.name} /></li>
                     })}
                 </ul>
-    
+
                 <section className="m-text">
                     <p>{meeting.description}</p>
-                    <span className="b-view"><FontAwesomeIcon icon={faBookOpen} /></span>
-                    <span className="b-edit" onClick={() => this.handleEdit(meeting.id)}><FontAwesomeIcon icon={faEdit} /></span>
-                    <span className="b-delete" onClick={() => this.handleDelete(meeting.id)}><FontAwesomeIcon icon={faTrash} /></span>
+                    <span className="b-view" onClick={() => showMeetingDetails(meeting.id)}><FontAwesomeIcon icon={faBookOpen} /></span>
+                    <span className="b-edit" onClick={() => saveCurrMeeting(meeting.id)}><FontAwesomeIcon icon={faEdit} /></span>
+                    <span className="b-delete" onClick={() => deleteMeeting(meeting.id)}><FontAwesomeIcon icon={faTrash} /></span>
                 </section>
             </div>
         )

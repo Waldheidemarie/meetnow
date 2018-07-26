@@ -1,10 +1,15 @@
 /* ======General====== */
 
-.App{
+.App, .m-details{
     height: 100vh;
     display: grid;
     grid-template-columns: repeat(24, 1fr);
     grid-template-rows: 3.5rem auto 20rem;
+}
+
+a{
+    color: #263B30;
+    font-weight: bold;
 }
 
 a:link {
@@ -16,7 +21,7 @@ a:visited {
 }
 
 a:hover {
-    color: #FFF;
+    color: lightgreen;
     font-weight: bold;
 }
 
@@ -32,24 +37,25 @@ button, img{
 .navbar{
     grid-column: 1 / -1;
     display: grid;
-    grid-template-columns: repeat(22, 1fr);
-    grid-template-rows: 2.5rem 1rem;
-    background-color: skyblue;
+    grid-template-columns: repeat(24, 1fr);
+    grid-template-rows: 3rem 1.8rem;
+    background-color: #FFF;
+    border-bottom: .1rem solid #CCC;
 }
 
 .navbar-brand{
-    grid-column: 2 / span 4;
-    margin-left: 1.2rem;
+    grid-column: 3 / span 4;
     padding-top: .7rem;
+    margin-left: 1.5rem;
 }
 
 .navbar button{
-    grid-column: 6 / span 3;
+    grid-column: 10 / span 3;
     width: 7rem;
     height: 2rem;
     border-radius: .5rem;
     border: 2px solid #000;
-    margin-top: .2rem;
+    margin-top: .5rem;
 }
 
 .navbar button:hover{
@@ -61,28 +67,53 @@ button, img{
 }
 
 .navbar-ul {
-    grid-column: 17 / -2;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-column: 17 / -3;
     list-style: none;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .nav-2{
     grid-column: 1 / -1;
-    background-color: #006BA6;
-    border-bottom: 2px solid #FFF;
+    background-color: #263B30;
+    color: orange;
+    font-size: .7rem;
+}
+
+.nav-2 ul {
+    width: 85%;
+    margin-left: 3.2rem;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.nav-2 ul li{
+    margin-right: .8rem;
+    border-right: .5px solid orange;
+    padding-right: .5rem;
+}
+
+
+/* ======= Categories List====== */
+
+.m-categories{
+    grid-column: 4 / span 4;
+    padding: 2.5rem .5rem 0 1rem;
 }
 
 /* =======Meeting List====== */
 
 .meeting-list{
-    grid-column: 2 / span 14;
+    grid-column: 8 / span 9;
 }
 
 .meeting-list, 
 .meeting-activities,
 .m-form{
-    padding-top: .8rem;
+    padding-top: 1rem;
 }
 
 .meeting{
@@ -100,7 +131,7 @@ button, img{
 .m-title{
     grid-column: 1 / -1;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
 }
 
 .m-host{
@@ -110,7 +141,12 @@ button, img{
 }
 
 .m-header{
-    grid-column: 2 / -1;
+    grid-column: 3 / -1;
+}
+
+.m-header p{
+    font-size: .6rem;
+    padding-top: 0;
 }
 
 .m-time{
@@ -127,19 +163,16 @@ button, img{
 
 .m-attendee{
     grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    height: 3rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 3.5rem;
     border-bottom: .5px solid #DDD;
-    background-color: #006BA6;
     background-color: #CCC;
-    margin: 0;
-    padding: .7rem;
     list-style: none;
 }
 
 .m-attendee img{
-    margin: 0 3.5rem 3.5rem 0;
     padding: 1px;
     border: .5px solid #FFF;
 }
@@ -197,14 +230,14 @@ button, img{
 }
 
 .b-delete:hover{
-    color: maroon;
+    color: red;
 }
 
 /* ====== Meeting Activities ====== */
 
 .meeting-activities,
 .m-form{
-    grid-column:  17 / span 7;
+    grid-column:  17 / span 5;
 }
 
 /* ====== Footer ====== */
@@ -213,9 +246,9 @@ button, img{
     grid-column: 1 / -1;
     text-align: center;
     opacity: 0.8;
-    background-color: #006BA6;
+    background-color: #263B30;
     color: #FFF;
-    border-top: 2px solid #FFF;
+    border-top: .3rem solid #FFF;
 }
 
 /* ====== Meeting Form ====== */
@@ -262,7 +295,6 @@ button, img{
 .btn-cancel{
     background-color: maroon;
 }
-
 
 /* ====== Media Queries ====== */
 

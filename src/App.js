@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { getData } from './data';
 import Home from './components/Home';
 import NavBar from './components/NavBar';
+import CategoriesList from './components/CategoriesList';
 import MeetingList from './components/MeetingList';
 import MeetingDetails from './components/MeetingDetails';
 import MeetingActivity from './components/MeetingActivity';
@@ -20,7 +21,7 @@ class App extends Component {
 
   componentDidMount() {
     let defaultData = getData();
-     this.setState({ 
+     this.setState({
        meetings: defaultData,
        isFormOpen: false
     })
@@ -28,10 +29,14 @@ class App extends Component {
 
   displayForm = (e) => {
     e.preventDefault();
-    this.setState({ 
+    this.setState({
         currMeeting: {},
-        isFormOpen: true 
+        isFormOpen: true
     });
+  }
+
+  showMeetingDetails = (meetingId) => {
+      console.log('show details id', meetingId)
   }
 
   saveCurrMeeting = (meetingId) => {
@@ -47,13 +52,13 @@ class App extends Component {
         const { meetings } = this.state;
         newMeeting.id = Date.now();
         let updatedMeetings = [...meetings, newMeeting];
-        this.setState({ 
+        this.setState({
           meetings: updatedMeetings,
           isFormOpen: false
         });
       } else if (this.state.meetings.length && newMeeting.id){
           const { meetings } = this.state;
-          this.setState({ 
+          this.setState({
             meetings: meetings.map(m => {
                 if(m.id === newMeeting.id){
                   return Object.assign({}, m, newMeeting);
@@ -74,7 +79,8 @@ class App extends Component {
 
   deleteMeeting = (meetingId) => {
       this.setState({
-        meetings: this.state.meetings.filter(meeting => meeting.id !== meetingId)
+        meetings: this.state.meetings.filter(meeting => meeting.id !== meetingId),
+        currMeeting: {}
       })
   }
 
@@ -83,16 +89,30 @@ class App extends Component {
     console.log('meetings in state: ', meetings);
 
     return (
-      <div className="App">
-        <NavBar displayForm={this.displayForm}/>
-          <Route exact path='/' render={() => <Home />}/>
-        <Route path='/meetings' render={() => <MeetingList meetings={meetings} saveCurrMeeting={this.saveCurrMeeting} deleteMeeting={this.deleteMeeting} />} />
-          <Route path='/meetings/:id' render={() => <MeetingDetails />} />
-          {isFormOpen
-            ? <MeetingForm updateMeetings={this.updateMeetings} currMeeting={currMeeting.id ? currMeeting : null }/>
-            : <MeetingActivity />
-          }
-          <Footer />
+      <div>
+        <Switch>
+            <Route exact path='/' render={() => <Home />}/>
+        </Switch>
+        <Route path='/(.+)' render={() => (
+          <div className="App">
+            <NavBar displayForm={this.displayForm}/>
+            <CategoriesList />
+            <Switch>
+                <Route exact path='/meetings' render={() => <MeetingList
+                      meetings={meetings}
+                      showMeetingDetails={this.showMeetingDetails} saveCurrMeeting={this.saveCurrMeeting}
+                      deleteMeeting={this.deleteMeeting} />} />
+                  <Route path='/meetings/:id' render={() => <MeetingDetails />} />
+            </Switch>
+            {isFormOpen
+              ? <MeetingForm
+                    updateMeetings={this.updateMeetings}
+                    currMeeting={currMeeting.id ? currMeeting : null }/>
+              : <MeetingActivity />
+            }
+            <Footer />
+          </div>
+        )}/>
       </div>
     );
   }

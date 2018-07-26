@@ -16,10 +16,25 @@ class NavBar extends Component {
                 <button onClick={this.handleOpenForm}>Create Meeting</button>
                 <ul className="navbar-ul">
                     <li><a href="#">Register</a></li>
-                    <li><a href="#">Log In</a></li>
-                    <li><a href="#">Log Out</a></li>
+                    <li><a href="#">LogIn</a></li>
+                    <li><a href="#">LogOut</a></li>
                 </ul>
-                <div className="nav-2"></div>
+                <div className="nav-2">
+                    <ul>
+                        <li>Science & Tech</li>
+                        <li>Business</li>
+                        <li>Entertainment</li>
+                        <li>Sports</li>
+                        <li>Fashion</li>
+                        <li>Lifestyle</li>
+                        <li>Volunteering</li>
+                        <li>Age Groups</li>
+                        <li>Health</li>
+                        <li>Career Fairs</li>
+                        <li>Research Groups</li>
+                        <li>Conferences</li>
+                    </ul>
+                </div>
             </nav>
         );
     }
