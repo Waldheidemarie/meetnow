@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserTie } from '@fortawesome/free-solid-svg-icons'
 
-class NavBar extends Component {    
+class NavBar extends Component {
 
     handleOpenForm = (e) => {
-        console.log('e in Navbar.js ', e.target);
         this.props.displayForm(e);
     }
 

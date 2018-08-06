@@ -10,15 +10,19 @@ import {faClock,
 class Meeting extends Component{
 
     render(){
-        const { meeting, showMeetingDetails, saveCurrMeeting, deleteMeeting } = this.props;
+        const { showMeeting, saveCurrMeeting, deleteMeeting } = this.props;
+        const meeting = Object.values(this.props.meeting)[0];
+        const hostPhotoURL = "https://randomuser.me/api/portraits/men/91.jpg";
         console.log('meeting: ', meeting);
+
         return (
             <div className="meeting">
 
                 <section className="m-title">
-                    <img className="m-host" src={meeting.hostPhotoURL} alt="host" />
+                    <img className="m-host" src={hostPhotoURL} alt="host" />
                     <div className="m-header">
                         <h4>{meeting.title}</h4>
+                        <p>Category: <strong>{meeting.category}</strong></p>
                         <p>Host: <strong>{meeting.hostName}</strong></p>
                     </div>
                 </section>
@@ -34,7 +38,7 @@ class Meeting extends Component{
 
                 <section className="m-text">
                     <p>{meeting.description}</p>
-                    <span className="b-view" onClick={() => showMeetingDetails(meeting.id)}><FontAwesomeIcon icon={faBookOpen} /></span>
+                    <span className="b-view" onClick={() => showMeeting(meeting.id)}><FontAwesomeIcon icon={faBookOpen} /></span>
                     <span className="b-edit" onClick={() => saveCurrMeeting(meeting.id)}><FontAwesomeIcon icon={faEdit} /></span>
                     <span className="b-delete" onClick={() => deleteMeeting(meeting.id)}><FontAwesomeIcon icon={faTrash} /></span>
                 </section>
