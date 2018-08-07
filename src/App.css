@@ -112,14 +112,22 @@ button, img{
 
 /* =======Meeting List====== */
 
-.meeting-list{
+.meetings-list,
+.no-meetings{
     grid-column: 8 / span 9;
 }
 
-.meeting-list,
+.meetings-list,
 .meeting-activities,
-.m-form{
+.m-form,
+.no-meetings{
     padding-top: 1rem;
+}
+
+.no-meetings{
+    margin: 4rem auto;
+    font-size: 1.5rem;
+    text-align: center;
 }
 
 .meeting{

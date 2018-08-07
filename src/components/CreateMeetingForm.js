@@ -64,11 +64,11 @@ class CreateMeetingForm extends Component {
           </div><br />
           <div className="form-input">
             <label htmlFor="date">Date:</label><br />
-            <Field component="input" type="date" name="date" placeholder="date of meeting" />
+            <Field component="input" type="date" name="date" />
           </div><br />
           <div className="form-input">
             <label htmlFor="venue">Venue:</label><br />
-            <Field component="input" type="text" name="venue" placeholder="venue of meeting" />
+            <Field component="input" type="text" name="venue" placeholder="Where is it taking place?" />
           </div><br />
           <div className="f-buttons">
             <button className="btn-submit" type="submit" disabled={pristine || submitting}>Create</button>
