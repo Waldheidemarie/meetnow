@@ -4,16 +4,11 @@ import {
     FETCH_MEETINGS,
     CREATE_MEETING,
     SHOW_MEETING,
+    EDIT_MEETING,
     UPDATE_MEETING,
-    DELETE_MEETING,
-    HIDE_FORM
+    DELETE_MEETING
 } from './contants';
 
-export function hideForm() {
-    return {
-        type: HIDE_FORM
-    }
-}
 
 export function fetchCategories(){
     return {
@@ -45,6 +40,12 @@ export function showMeeting(id) {
     return {
         type: SHOW_MEETING,
         payload: id
+    }
+}
+
+export function editMeeting() {
+    return {
+        type: EDIT_MEETING
     }
 }
 

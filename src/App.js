@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import { hideForm } from './actions';
 import Home from './components/Home';
 import NavBar from './components/NavBar';
 import CategoriesList from './components/CategoriesList';
@@ -25,11 +23,11 @@ class App extends Component {
     })
   }
 
-  displayForm = (e) => {
-    e.preventDefault();
+  toggleForm = () => {
+    let { isFormOpen } = this.state;
     this.setState({
         currMeeting: {},
-        isFormOpen: true
+        isFormOpen: isFormOpen === true ? false : true
     });
   }
 
@@ -52,7 +50,7 @@ class App extends Component {
         </Switch>
         <Route path='/(.+)' render={() => (
           <div className="App">
-            <NavBar displayForm={this.displayForm}/>
+            <NavBar isFormOpen={isFormOpen} toggleForm={this.toggleForm}/>
             <CategoriesList />
             <Switch>
                 <Route exact path='/meetings' component={MeetingsList} />
@@ -60,7 +58,8 @@ class App extends Component {
             </Switch>
             {isFormOpen
               ? <CreateMeetingForm
-                    updateMeetings={this.updateMeetings}
+                    isFormOpen={isFormOpen}
+                    toggleForm={this.toggleForm}
                     currMeeting={currMeeting.id ? currMeeting : null }/>
               : <MeetingActivity />
             }
@@ -73,4 +72,4 @@ class App extends Component {
 }
 
 
-export default connect(null, { hideForm })(App);
+export default App;

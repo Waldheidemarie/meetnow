@@ -3,9 +3,9 @@ import {
     FETCH_MEETINGS,
     CREATE_MEETING,
     SHOW_MEETING,
+    EDIT_MEETING,
     UPDATE_MEETING,
-    DELETE_MEETING,
-    HIDE_FORM
+    DELETE_MEETING
 } from '../actions/contants';
 //import { getDefaultMeetings } from '../data';
 
@@ -19,7 +19,7 @@ export default function(state = [], action){
            return update(state, {$push: [action.payload] });
         case SHOW_MEETING:
             return state.filter(m => m.id === action.payload.id)[0];
-        case HIDE_FORM:
+        case EDIT_MEETING:
             return false;
         default:
             return state;

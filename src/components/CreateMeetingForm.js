@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import uuidv4 from 'uuid/v4';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { createMeeting, hideForm } from "../actions";
+import { createMeeting } from "../actions";
 
 
 class CreateMeetingForm extends Component {
@@ -17,8 +16,12 @@ class CreateMeetingForm extends Component {
       timestamp: Date.now()
     });
 
-    this.props.reset();
-    this.props.destroy();
+    //this.props.reset();
+    this.props.toggleForm();
+  }
+
+  handleToggleForm = () => {
+    this.props.toggleForm();
   }
 
   render () {
@@ -68,8 +71,9 @@ class CreateMeetingForm extends Component {
             <Field component="input" type="text" name="venue" placeholder="venue of meeting" />
           </div><br />
           <div className="f-buttons">
-            <button className="btn-submit" type="submit" disabled={pristine || submitting}>Save</button>
-            <button className="btn-cancel" type="reset" disabled={pristine || submitting} onClick={reset}>Reset</button>
+            <button className="btn-submit" type="submit" disabled={pristine || submitting}>Create</button>
+            <button className="btn-reset" type="reset" disabled={pristine || submitting} onClick={reset}>Reset</button>
+            <button className="btn-cancel" onClick={this.handleToggleForm}>Cancel</button>
           </div>
         </form>
       </div>
@@ -78,7 +82,7 @@ class CreateMeetingForm extends Component {
 }
 
 
-CreateMeetingForm = connect(null, { createMeeting, hideForm })(CreateMeetingForm);
+CreateMeetingForm = connect(null, { createMeeting })(CreateMeetingForm);
 
 export default reduxForm({
     form: "createMeetingForm"

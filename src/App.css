@@ -315,6 +315,12 @@ button, img{
     margin-right: .2rem;
 }
 
+.btn-reset{
+    background-color: skyblue;
+    color: #000 !important;
+    margin-right: .2rem;
+}
+
 .btn-cancel{
     background-color: maroon;
 }

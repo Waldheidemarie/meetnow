@@ -12,14 +12,13 @@ import registerServiceWorker from './registerServiceWorker';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const initialState = {
-    form: { isFormOpen: false }
-}
+// const initialState = {
+//     form: { isFormOpen: false }
+// }
 
 
 const store = createStore(
     rootReducer,
-    initialState,
     composeEnhancers(applyMiddleware(logger)),
 );
 

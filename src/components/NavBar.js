@@ -4,15 +4,16 @@ import { faUserTie } from '@fortawesome/free-solid-svg-icons'
 
 class NavBar extends Component {
 
-    handleOpenForm = (e) => {
-        this.props.displayForm(e);
+    handleToggleForm = () => {
+        this.props.toggleForm();
     }
 
     render(){
+        const { isFormOpen } = this.props;
         return (
             <nav className="navbar">
                 <div className="navbar-brand"><a href="#"><FontAwesomeIcon icon={faUserTie} /> | MeetNOW!</a></div>
-                <button onClick={this.handleOpenForm}>Create Meeting</button>
+                <button onClick={this.handleToggleForm}>{ isFormOpen === false ? "Create Meeting" : "Exit Form" }</button>
                 <ul className="navbar-ul">
                     <li><a href="#">Register</a></li>
                     <li><a href="#">LogIn</a></li>

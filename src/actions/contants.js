@@ -3,7 +3,7 @@ export const SHOW_CATEGORY = 'SHOW_CATEGORY';
 export const FETCH_MEETINGS = 'FETCH_MEETINGS';
 export const CREATE_MEETING = 'CREATE_MEETING';
 export const SHOW_MEETING = 'SHOW_MEETING';
+export const EDIT_MEETING = 'EDIT_MEETING';
 export const UPDATE_MEETING = 'UPDATE_MEETING';
 export const DELETE_MEETING = 'DELETE_MEETING';
-export const HIDE_FORM = 'HIDE_FORM';
 
