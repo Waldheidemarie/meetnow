@@ -51,6 +51,7 @@ export function editMeeting(id) {
 }
 
 export function updateMeeting(values) {
+    console.log('values update actions', values);
     return {
         type: UPDATE_MEETING,
         payload: values

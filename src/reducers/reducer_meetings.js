@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import update from 'immutability-helper';
 import {
     FETCH_MEETINGS,
@@ -14,17 +15,15 @@ const initialState = getDefaultMeetings();
 export default function(state = initialState, action){
     switch(action.type){
         case FETCH_MEETINGS:
-            return state;
+            return _.mapKeys(state, 'id');
         case CREATE_MEETING:
             return update(state, { $push: [action.payload] });
         case EDIT_MEETING:
-            console.log('state in edit reducer', state);
-            // const currMeeting = Object.values(state).filter(m => m.id === action.payload)[0];
-            // return { ...state, currMeeting }
-            return Object.values(state).filter(m => m.id === action.payload)[0];
+            const others = _.mapKeys((Object.values(state).filter(m => m.id !== action.payload)), 'id');
+            let currMeeting = Object.values(state).filter(m => m.id === action.payload)[0];
+            return { ...others, currMeeting }
         case UPDATE_MEETING:
-            console.log('state in update reducer', state);
-            return { ...state, [action.payload.id]: action.payload }
+            return update(state, {[action.payload.id]: { $set: action.payload }});
         default:
             return state;
     }
