@@ -66,6 +66,10 @@ button, img{
     font-weight: bold;
 }
 
+.navbar button:active{
+    outline-color: #FFF;
+}
+
 .navbar-ul {
     grid-column: 17 / -3;
     list-style: none;

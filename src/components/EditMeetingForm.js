@@ -1,34 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
-import { editMeeting } from "../actions";
+import { Field, reduxForm, initialize } from 'redux-form';
+import { editMeeting, updateMeeting } from "../actions";
 
 
 class EditMeetingForm extends Component {
 
   onSubmit = (values) => {
-    console.log('values in onSubmit ', values)
+    console.log('values in EditForm onSubmit ', values)
     this.props.updateMeeting({
       ...values,
-      id: id,
       timestamp: Date.now()
     });
 
-    //this.props.reset();
-    this.props.toggleForm();
+    this.props.reset();
+    this.props.formOps.hide();
   }
 
-  handleToggleForm = () => {
-    this.props.toggleForm();
+  handleForm = () => {
+    this.props.formOps.hide();
+  }
+
+  UNSAFE_componentWillReceiveProps = (nextProps) => {
+     console.log('nextProps in EditForm ', nextProps.initialValues);
   }
 
   render() {
     const { handleSubmit, reset, pristine, submitting } = this.props;
-    console.log('Props in CreateMeetingForm', this.props);
+    console.log('Props in EditMeetingForm', this.props.initialValues);
 
     return (
       <div className="m-form">
-        <h3>+New Meeting</h3>
+        <h4>Update Meeting</h4>
         <form onSubmit={handleSubmit(this.onSubmit)}>
           <div className="form-input">
             <label htmlFor="title">Title:</label><br />
@@ -69,9 +72,9 @@ class EditMeetingForm extends Component {
             <Field component="input" type="text" name="venue" placeholder="Where is it taking place?" />
           </div><br />
           <div className="f-buttons">
-            <button className="btn-submit" type="submit" disabled={pristine || submitting}>Create</button>
+            <button className="btn-submit" type="submit" disabled={pristine || submitting}>Update</button>
             <button className="btn-reset" type="reset" disabled={pristine || submitting} onClick={reset}>Reset</button>
-            <button className="btn-cancel" onClick={this.handleToggleForm}>Cancel</button>
+            <button className="btn-cancel" onClick={this.handleForm}>Cancel</button>
           </div>
         </form>
       </div>
@@ -79,9 +82,16 @@ class EditMeetingForm extends Component {
   }
 }
 
-
-EditMeetingForm = connect(null, { editMeeting, updateMeeting })(EditMeetingForm);
-
-export default reduxForm({
-  form: "editMeetingForm"
+EditMeetingForm = reduxForm({
+  form: "editMeetingForm",
+  fields: ['title', 'hostName', 'description', 'category', 'date', 'venue']
 })(EditMeetingForm);
+
+EditMeetingForm = connect(
+  state => ({
+    initialValues: state.meetings.currMeeting
+  }),
+  { editMeeting, updateMeeting }
+)(EditMeetingForm);
+
+export default EditMeetingForm;

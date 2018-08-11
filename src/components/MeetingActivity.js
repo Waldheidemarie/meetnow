@@ -4,7 +4,7 @@ class MeetingActivity extends Component {
     render () {
         return (
             <div className="meeting-activities">
-                <h3>Meeting Activities</h3>
+                <h4>Meeting Activities</h4>
             </div>
         )
     }

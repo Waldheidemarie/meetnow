@@ -7,13 +7,14 @@ import MeetingsList from './components/MeetingsList';
 import MeetingDetails from './components/MeetingDetails';
 import MeetingActivity from './components/MeetingActivity';
 import CreateMeetingForm from './components/CreateMeetingForm';
+import EditMeetingForm from './components/EditMeetingForm';
 import Footer from './components/Footer';
 import './App.css';
 
 class App extends Component {
 
   state = {
-      currMeeting: {},
+      currMeetingId: '',
       isFormOpen: false
   }
 
@@ -25,23 +26,31 @@ class App extends Component {
 
   toggleForm = () => {
     let { isFormOpen } = this.state;
-    this.setState({
-        currMeeting: {},
-        isFormOpen: isFormOpen === true ? false : true
-    });
+    this.setState({ isFormOpen: isFormOpen === true ? false : true });
+  }
+
+  displayForm = () => {
+    this.setState({ isFormOpen: true });
+  }
+
+  hideForm = () => {
+    this.setState({ isFormOpen: false });
+  }
+
+  formOps = {
+      toggle: this.toggleForm,
+      display: this.displayForm,
+      hide: this.hideForm
+  }
+
+  saveCurrMeeting = (id) => {
+    console.log('currMeeting id', id);
+    this.setState({ currMeetingId: id });
   }
 
 
-  // saveCurrMeeting = (meetingId) => {
-  //     console.log('currMeeting id', meetingId);
-  //     const { meetings } = this.state;
-  //     let currMeeting = meetings.filter(meeting => meeting.id === meetingId)[0];
-  //     this.setState({ currMeeting, isFormOpen: true });
-  // }
-
-
   render() {
-    const { currMeeting, isFormOpen } = this.state;
+    const { isFormOpen, currMeetingId } = this.state;
 
     return (
       <div>
@@ -50,17 +59,22 @@ class App extends Component {
         </Switch>
         <Route path='/(.+)' render={() => (
           <div className="App">
-            <NavBar isFormOpen={isFormOpen} toggleForm={this.toggleForm}/>
+            <NavBar isFormOpen={isFormOpen} formOps={this.formOps} saveCurrMeeting={this.saveCurrMeeting}/>
             <CategoriesList />
             <Switch>
-                <Route exact path='/meetings' component={MeetingsList} />
+              <Route exact path='/meetings' render={() =>
+                          <MeetingsList
+                                  isFormOpen={isFormOpen}
+                                  formOps={this.formOps}
+                                  saveCurrMeeting={this.saveCurrMeeting}/>}
+                                  />
                 <Route path='/meetings/:id' component={MeetingDetails} />
             </Switch>
             {isFormOpen
-              ? <CreateMeetingForm
-                    isFormOpen={isFormOpen}
-                    toggleForm={this.toggleForm}
-                    currMeeting={currMeeting.id ? currMeeting : null }/>
+              ? (currMeetingId
+                    ? <EditMeetingForm isFormOpen={isFormOpen} formOps={this.formOps} />
+                    : <CreateMeetingForm isFormOpen={isFormOpen} formOps={this.formOps} />
+                  )
               : <MeetingActivity />
             }
             <Footer />

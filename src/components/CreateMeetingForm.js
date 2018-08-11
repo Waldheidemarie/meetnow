@@ -11,17 +11,17 @@ class CreateMeetingForm extends Component {
     console.log('values in onSubmit ', values)
     let id = await uuidv4();
     this.props.createMeeting({
-      ...values,
       id: id,
+      ...values,
       timestamp: Date.now()
     });
 
-    //this.props.reset();
-    this.props.toggleForm();
+    this.props.reset();
+    this.props.formOps.hide();
   }
 
-  handleToggleForm = () => {
-    this.props.toggleForm();
+  handleForm = () => {
+    this.props.formOps.hide();
   }
 
   render () {
@@ -30,7 +30,7 @@ class CreateMeetingForm extends Component {
 
     return (
       <div className="m-form">
-        <h3>+New Meeting</h3>
+        <h4>+New Meeting</h4>
         <form onSubmit={handleSubmit(this.onSubmit)}>
           <div className="form-input">
             <label htmlFor="title">Title:</label><br />
@@ -73,7 +73,7 @@ class CreateMeetingForm extends Component {
           <div className="f-buttons">
             <button className="btn-submit" type="submit" disabled={pristine || submitting}>Create</button>
             <button className="btn-reset" type="reset" disabled={pristine || submitting} onClick={reset}>Reset</button>
-            <button className="btn-cancel" onClick={this.handleToggleForm}>Cancel</button>
+            <button className="btn-cancel" onClick={this.handleForm}>Cancel</button>
           </div>
         </form>
       </div>

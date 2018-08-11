@@ -7,20 +7,24 @@ import {
     UPDATE_MEETING,
     DELETE_MEETING
 } from '../actions/contants';
-//import { getDefaultMeetings } from '../data';
+import { getDefaultMeetings } from '../data';
 
-//const initialState = getDefaultMeetings();
+const initialState = getDefaultMeetings();
 
-export default function(state = [], action){
+export default function(state = initialState, action){
     switch(action.type){
         case FETCH_MEETINGS:
-            return [ ...state];
+            return state;
         case CREATE_MEETING:
-           return update(state, {$push: [action.payload] });
-        case SHOW_MEETING:
-            return state.filter(m => m.id === action.payload.id)[0];
+            return update(state, { $push: [action.payload] });
         case EDIT_MEETING:
-            return false;
+            console.log('state in edit reducer', state);
+            // const currMeeting = Object.values(state).filter(m => m.id === action.payload)[0];
+            // return { ...state, currMeeting }
+            return Object.values(state).filter(m => m.id === action.payload)[0];
+        case UPDATE_MEETING:
+            console.log('state in update reducer', state);
+            return { ...state, [action.payload.id]: action.payload }
         default:
             return state;
     }

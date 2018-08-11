@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchMeetings, showMeeting } from '../actions';
+import { fetchMeetings, showMeeting, editMeeting, deleteMeeting } from '../actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFrown } from '@fortawesome/free-solid-svg-icons';
 import Meeting from './Meeting';
@@ -11,12 +11,28 @@ class MeetingsList extends Component {
         this.props.fetchMeetings();
     }
 
+
+  currMeeting = async (meetingId) => {
+        console.log('currMeeting id', meetingId);
+        await this.props.saveCurrMeeting(meetingId);
+        this.props.formOps.display();
+        this.props.editMeeting(meetingId);
+  }
+
+  handleDelete = (id) => {
+      this.props.deleteMeeting(id);
+  }
+
     renderMeetings = (meetings) => {
-        return meetings.map(m => {
-            return <Meeting key={m.id} meeting={m} />
+        return Object.values(meetings).map(m => {
+            return <Meeting
+                        key={m.id}
+                        meeting={m}
+                        currMeeting={this.currMeeting}
+                        handleDelete={this.handleDelete}
+                        />
         })
     }
-
 
     render () {
         if(this.props.meetings.length === 0){
@@ -28,12 +44,12 @@ class MeetingsList extends Component {
                     </div>
         }
 
-        const { meetings, showMeeting } = this.props;
-        console.log(this.props);
+        const { meetings, showMeeting, deleteMeeting } = this.props;
+        console.log('Props in MeetingsList',this.props);
 
         return (
             <div className="meetings-list">
-                <h3>Scheduled Meetings</h3>
+                <h4>Scheduled Meetings</h4>
                 { this.renderMeetings(meetings) }
             </div>
         )
@@ -47,5 +63,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { fetchMeetings, showMeeting }
+    { fetchMeetings, showMeeting, editMeeting, deleteMeeting }
 )(MeetingsList);

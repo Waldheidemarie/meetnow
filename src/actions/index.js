@@ -29,10 +29,10 @@ export function fetchMeetings() {
     }
 }
 
-export function createMeeting(...values) {
+export function createMeeting(values) {
     return {
         type: CREATE_MEETING,
-        payload: {...values}
+        payload: values,
     }
 }
 
@@ -43,16 +43,17 @@ export function showMeeting(id) {
     }
 }
 
-export function editMeeting() {
+export function editMeeting(id) {
     return {
-        type: EDIT_MEETING
+        type: EDIT_MEETING,
+        payload: id
     }
 }
 
-export function updateMeeting(id) {
+export function updateMeeting(values) {
     return {
         type: UPDATE_MEETING,
-        payload: id
+        payload: values
     }
 }
 

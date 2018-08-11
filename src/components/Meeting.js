@@ -2,16 +2,19 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faClock,
         faMapMarkerAlt,
-        faBookOpen,
-        faEdit,
+        faFolderOpen,
+        faPencilAlt,
         faTrash
     } from '@fortawesome/free-solid-svg-icons';
 
 class Meeting extends Component{
 
+    submitDelete = (id) => {
+        this.props.handleDelete(id);
+    }
+
     render(){
-        const { showMeeting, saveCurrMeeting, deleteMeeting } = this.props;
-        const meeting = Object.values(this.props.meeting)[0];
+        const { meeting, showMeeting, currMeeting, deleteMeeting } = this.props;
         const hostPhotoURL = "https://randomuser.me/api/portraits/men/91.jpg";
         console.log('meeting: ', meeting);
 
@@ -38,9 +41,9 @@ class Meeting extends Component{
 
                 <section className="m-text">
                     <p>{meeting.description}</p>
-                    <span className="b-view" onClick={() => showMeeting(meeting.id)}><FontAwesomeIcon icon={faBookOpen} /></span>
-                    <span className="b-edit" onClick={() => saveCurrMeeting(meeting.id)}><FontAwesomeIcon icon={faEdit} /></span>
-                    <span className="b-delete" onClick={() => deleteMeeting(meeting.id)}><FontAwesomeIcon icon={faTrash} /></span>
+                    <span className="b-view" onClick={() => showMeeting(meeting.id)}><FontAwesomeIcon icon={faFolderOpen} /></span>
+                    <span className="b-edit" onClick={() => currMeeting(meeting.id)}><FontAwesomeIcon icon={faPencilAlt} /></span>
+                    <span className="b-delete" onClick={this.submitDelete(meeting.id)}><FontAwesomeIcon icon={faTrash} /></span>
                 </section>
             </div>
         )

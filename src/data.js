@@ -1,5 +1,5 @@
 export const getDefaultMeetings = () => {
-    const meetings = [
+    return [
         {
             id: "1",
             title: "New Business Workshop",
@@ -10,7 +10,7 @@ export const getDefaultMeetings = () => {
             date: "2018-10-03",
             venue: "123 Main St, Brampton, ON",
             attendees: [
-                { 
+                {
                     id: 'a1',
                     name: "John Doe",
                     photoURL: "https://randomuser.me/api/portraits/thumb/men/43.jpg"
@@ -127,7 +127,6 @@ export const getDefaultMeetings = () => {
         }
     ]
 
-    return meetings;
 }
 
 export const getDefaultCategories = () => {
