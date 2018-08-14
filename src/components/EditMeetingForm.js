@@ -1,79 +1,112 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm, initialize } from 'redux-form';
-import { editMeeting, updateMeeting } from "../actions";
+import { updateMeeting } from "../actions";
 
 
 class EditMeetingForm extends Component {
 
-  onSubmit = (values) => {
-    console.log('values in EditForm onSubmit ', values)
-    this.props.updateMeeting({
-      ...values,
-      timestamp: Date.now()
-    });
+  state = {
+    id: '',
+    title: '',
+    hostName: '',
+    description: '',
+    category: '',
+    date: '',
+    venue: ''
+  }
 
-    this.props.reset();
+  componentDidMount() {
+    let { currMeetingId } = this.props;
+    this.setState({ id: currMeetingId })
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps){
+    console.log('nextProps in EditForm', nextProps);
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const timestamp = Date.now();
+    //const { id, title, hostName, description, category, date, venue } = this.state;
+    const updatedMeeting = Object.assign({}, this.state, timestamp);
+    // this.props.updateMeeting({
+    //   id,
+    //   title,
+    //   hostName,
+    //   description,
+    //   category,
+    //   date,
+    //   venue,
+    //   timestamp: Date.now()
+    // });
+    this.props.updateMeeting(updatedMeeting);
+
+    //this.props.reset();
     this.props.formOps.hide();
+  }
+
+  handleInput = (e) => {
+    console.log(e.target.value);
+    this.setState({
+      [e.target.name]: e.target.value
+    })
   }
 
   handleForm = () => {
     this.props.formOps.hide();
   }
 
-  UNSAFE_componentWillReceiveProps = (nextProps) => {
-     console.log('nextProps in EditForm ', nextProps.initialValues);
-  }
-
   render() {
-    const { handleSubmit, reset, pristine, submitting } = this.props;
-    console.log('Props in EditMeetingForm', this.props.initialValues);
+    console.log('Props in EditMeetingForm', this.props);
+    const currMeeting = this.props.meetings.filter(m => m.id === this.props.currMeetingId)[0];
+    //const { title, hostName, description, category, date, venue } = this.props;
+    const { title, hostName, description, category, date, venue } = currMeeting;
 
     return (
       <div className="m-form">
-        <h4>Update Meeting</h4>
-        <form onSubmit={handleSubmit(this.onSubmit)}>
+        <h4>+New Meeting</h4>
+        <form onSubmit={this.handleSubmit}>
           <div className="form-input">
             <label htmlFor="title">Title:</label><br />
-            <Field component="input" type="text" name="title" placeholder="Enter title" />
+            <input type="text" name="title" value={title} onChange={this.handleInput} placeholder="Enter title" />
           </div><br />
           <div className="form-input">
             <label htmlFor="hostName">Host:</label><br />
-            <Field component="input" type="text" name="hostName" placeholder="Who is hosting?" />
+            <input type="text" name="hostName" value={hostName} onChange={this.handleInput} placeholder="Who is hosting?" />
           </div><br />
           <div className="form-input">
             <label htmlFor="description">Description:</label><br />
-            <Field component="textarea" type="text" name="description" rows="3" placeholder="What is it about?" />
+            <textarea type="text" name="description" rows="3" value={description} onChange={this.handleInput} placeholder="What is it about?" />
           </div><br />
           <div className="form-input">
             <label htmlFor="category">Category:</label><br />
-            <Field component="select" name="category">
-              <option />
-              <option value="science">Science & Tech</option>
-              <option value="business">Business</option>
-              <option value="entertainment">Entertainment</option>
-              <option value="sports">Sports</option>
-              <option value="fashion">Fashion</option>
-              <option value="lifestyle">Lifestyle</option>
-              <option value="volunteering">Volunteering</option>
-              <option value="agegroups">Age Groups</option>
-              <option value="health">Health</option>
-              <option value="career">Career Fairs</option>
-              <option value="research">Research Groups</option>
-              <option value="conferences">Conferences</option>
-            </Field>
+            <select name="category" value={category} onChange={this.handleInput}>
+                  <option />
+                  <option >Science & Tech</option>
+                  <option >Business</option>
+                  <option >Entertainment</option>
+                  <option >Sports</option>
+                  <option >Fashion</option>
+                  <option >Lifestyle</option>
+                  <option >Volunteering</option>
+                  <option >Age Groups</option>
+                  <option >Health</option>
+                  <option >Career Fairs</option>
+                  <option >Research Groups</option>
+                  <option >Conferences</option>
+            </select>
           </div><br />
           <div className="form-input">
             <label htmlFor="date">Date:</label><br />
-            <Field component="input" type="date" name="date" />
+            <input type="date" name="date" value={date} onChange={this.handleInput} />
           </div><br />
           <div className="form-input">
             <label htmlFor="venue">Venue:</label><br />
-            <Field component="input" type="text" name="venue" placeholder="Where is it taking place?" />
+            <input type="text" name="venue" value={venue} onChange={this.handleInput} placeholder="Where is it taking place?" />
           </div><br />
           <div className="f-buttons">
-            <button className="btn-submit" type="submit" disabled={pristine || submitting}>Update</button>
-            <button className="btn-reset" type="reset" disabled={pristine || submitting} onClick={reset}>Reset</button>
+            <button className="btn-submit" type="submit">Update</button>
+            <button className="btn-reset" type="reset">Reset</button>
             <button className="btn-cancel" onClick={this.handleForm}>Cancel</button>
           </div>
         </form>
@@ -82,16 +115,11 @@ class EditMeetingForm extends Component {
   }
 }
 
-EditMeetingForm = reduxForm({
-  form: "editMeetingForm",
-  fields: ['title', 'hostName', 'description', 'category', 'date', 'venue']
-})(EditMeetingForm);
 
-EditMeetingForm = connect(
-  state => ({
-    initialValues: state.meetings.currMeeting
-  }),
-  { editMeeting, updateMeeting }
-)(EditMeetingForm);
+const mapStateToProps = (state) => {
+    return {
+      meetings: state.meetings
+    }
+}
 
-export default EditMeetingForm;
+export default connect(mapStateToProps, { updateMeeting })(EditMeetingForm);

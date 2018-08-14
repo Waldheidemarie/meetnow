@@ -4,7 +4,6 @@ import {
     FETCH_MEETINGS,
     CREATE_MEETING,
     SHOW_MEETING,
-    EDIT_MEETING,
     UPDATE_MEETING,
     DELETE_MEETING
 } from './contants';
@@ -29,10 +28,11 @@ export function fetchMeetings() {
     }
 }
 
-export function createMeeting(values) {
+export function createMeeting(newMeeting) {
+    console.log('values in create action', newMeeting)
     return {
         type: CREATE_MEETING,
-        payload: values,
+        payload: {...newMeeting}
     }
 }
 
@@ -43,18 +43,11 @@ export function showMeeting(id) {
     }
 }
 
-export function editMeeting(id) {
-    return {
-        type: EDIT_MEETING,
-        payload: id
-    }
-}
-
-export function updateMeeting(values) {
-    console.log('values update actions', values);
+export function updateMeeting(updatedMeeting) {
+    console.log('values update actions', updatedMeeting);
     return {
         type: UPDATE_MEETING,
-        payload: values
+        payload: { updatedMeeting }
     }
 }
 

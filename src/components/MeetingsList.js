@@ -16,7 +16,6 @@ class MeetingsList extends Component {
         console.log('currMeeting id', meetingId);
         await this.props.saveCurrMeeting(meetingId);
         this.props.formOps.display();
-        this.props.editMeeting(meetingId);
   }
 
   handleDelete = (id) => {
@@ -63,5 +62,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { fetchMeetings, showMeeting, editMeeting, deleteMeeting }
+    { fetchMeetings, showMeeting, deleteMeeting }
 )(MeetingsList);

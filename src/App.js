@@ -34,7 +34,7 @@ class App extends Component {
   }
 
   hideForm = () => {
-    this.setState({ isFormOpen: false });
+    this.setState({ currMeetingId:'', isFormOpen: false });
   }
 
   formOps = {
@@ -72,7 +72,7 @@ class App extends Component {
             </Switch>
             {isFormOpen
               ? (currMeetingId
-                    ? <EditMeetingForm isFormOpen={isFormOpen} formOps={this.formOps} />
+                    ? <EditMeetingForm isFormOpen={isFormOpen} formOps={this.formOps} currMeetingId={currMeetingId}/>
                     : <CreateMeetingForm isFormOpen={isFormOpen} formOps={this.formOps} />
                   )
               : <MeetingActivity />
