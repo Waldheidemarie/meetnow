@@ -9,12 +9,12 @@ import {faClock,
 
 class Meeting extends Component{
 
-    submitDelete = (id) => {
-        this.props.handleDelete(id);
+    submitDelete = (meetingToDeleteId) => {
+        this.props.handleDelete(meetingToDeleteId);
     }
 
     render(){
-        const { meeting, showMeeting, currMeeting, deleteMeeting } = this.props;
+        const { meeting, showMeeting, currMeeting } = this.props;
         const hostPhotoURL = "https://randomuser.me/api/portraits/men/91.jpg";
         console.log('meeting: ', meeting);
 
@@ -43,7 +43,7 @@ class Meeting extends Component{
                     <p>{meeting.description}</p>
                     <span className="b-view" onClick={() => showMeeting(meeting.id)}><FontAwesomeIcon icon={faFolderOpen} /></span>
                     <span className="b-edit" onClick={() => currMeeting(meeting.id)}><FontAwesomeIcon icon={faPencilAlt} /></span>
-                    <span className="b-delete" onClick={this.submitDelete(meeting.id)}><FontAwesomeIcon icon={faTrash} /></span>
+                    <span className="b-delete" onClick={() => this.submitDelete(meeting.id)}><FontAwesomeIcon icon={faTrash} /></span>
                 </section>
             </div>
         )

@@ -51,9 +51,9 @@ export function updateMeeting(updatedMeeting) {
     }
 }
 
-export function deleteMeeting(id) {
+export function deleteMeeting(meetingToDeleteId) {
     return {
         type: DELETE_MEETING,
-        payload: id
+        payload: meetingToDeleteId
     }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchMeetings, showMeeting, editMeeting, deleteMeeting } from '../actions';
+import { fetchMeetings, showMeeting, deleteMeeting } from '../actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFrown } from '@fortawesome/free-solid-svg-icons';
 import Meeting from './Meeting';
@@ -18,8 +18,8 @@ class MeetingsList extends Component {
         this.props.formOps.display();
   }
 
-  handleDelete = (id) => {
-      this.props.deleteMeeting(id);
+    handleDelete = (meetingToDeleteId) => {
+        this.props.deleteMeeting(meetingToDeleteId);
   }
 
     renderMeetings = (meetings) => {
@@ -43,7 +43,7 @@ class MeetingsList extends Component {
                     </div>
         }
 
-        const { meetings, showMeeting, deleteMeeting } = this.props;
+        const { meetings } = this.props;
         console.log('Props in MeetingsList',this.props);
 
         return (

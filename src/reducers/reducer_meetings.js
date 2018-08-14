@@ -29,6 +29,8 @@ export default function (state = initialState, action){
                             action.payload.updatedMeeting
                         )
                 ];
+        case DELETE_MEETING:
+            return [...state.filter(m => m.id !== action.payload)];
         default:
             return state;
     }
