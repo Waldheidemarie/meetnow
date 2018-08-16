@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
 import NavBar from './components/NavBar';
-import CategoriesList from './components/CategoriesList';
 import MeetingsList from './components/MeetingsList';
 import MeetingDetails from './components/MeetingDetails';
 import MeetingActivity from './components/MeetingActivity';
@@ -60,15 +59,22 @@ class App extends Component {
         <Route path='/(.+)' render={() => (
           <div className="App">
             <NavBar isFormOpen={isFormOpen} formOps={this.formOps} saveCurrMeeting={this.saveCurrMeeting}/>
-            <CategoriesList />
             <Switch>
-              <Route exact path='/meetings' render={() =>
+              <Route exact path='/meetings' render={({ history }) =>
                           <MeetingsList
+                                  history={history}
+                                  currMeetingId={currMeetingId}
                                   isFormOpen={isFormOpen}
                                   formOps={this.formOps}
                                   saveCurrMeeting={this.saveCurrMeeting}/>}
-                                  />
-                <Route path='/meetings/:id' component={MeetingDetails} />
+                          />
+              <Route exact path='/meetings/:id' render={({ history }) =>
+                          <MeetingDetails
+                                  history={history}
+                                  currMeetingId={currMeetingId}
+                                  isFormOpen={isFormOpen}
+                                  formOps={this.formOps}/>}
+                          />
             </Switch>
             {isFormOpen
               ? (currMeetingId

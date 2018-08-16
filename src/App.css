@@ -1,6 +1,5 @@
 /* ======General====== */
-
-.App, .m-details{
+.App{
     height: 100vh;
     display: grid;
     grid-template-columns: repeat(24, 1fr);
@@ -33,6 +32,42 @@ button, img{
     max-width: 100%;
 }
 
+button:hover{
+    cursor: pointer;
+}
+
+
+/* =======Home========= */
+.home{
+    height: 100vh;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-image: url('./utils/images/beach2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(0,0,0,.5);
+	background-blend-mode: darken;
+    color: #FFF;
+}
+
+.home-content{
+    z-index: 1;
+}
+
+.btn-start{
+    background-color:orange;
+    font-weight: bold;
+}
+
+.btn-start:hover{
+    background-color: #FFF;
+    color: navy;
+}
+
+
 /* =======Navbar========= */
 .navbar{
     grid-column: 1 / -1;
@@ -49,7 +84,7 @@ button, img{
     margin-left: 1.5rem;
 }
 
-.navbar button{
+.navbar button, .btn-start{
     grid-column: 10 / span 3;
     width: 7rem;
     height: 2rem;
@@ -101,31 +136,36 @@ button, img{
 }
 
 
-/* ======= Categories List====== */
-
-.m-categories{
-    grid-column: 4 / span 4;
-    padding: 2.5rem .5rem 0 1rem;
+/* =======Meeting List====== */
+.meetings-list,
+.m-details,
+.no-meetings{
+    grid-column: 4 / span 12;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 }
 
-.m-categories ul{
+.meetings-list,
+.m-details,
+.meeting-activities,
+.m-form,
+.no-meetings{
+    padding-top: 1rem;
+}
+
+.m-list-categories{
+    grid-column: 1 / span 1;
+    padding: 2.5rem 1.5rem 0 0;
+}
+
+.m-list-categories ul{
     list-style: none;
     padding-left: 0;
     line-height: 2rem;
 }
 
-/* =======Meeting List====== */
-
-.meetings-list,
-.no-meetings{
-    grid-column: 8 / span 9;
-}
-
-.meetings-list,
-.meeting-activities,
-.m-form,
-.no-meetings{
-    padding-top: 1rem;
+.m-list-items{
+    grid-column: 2 / span 3;
 }
 
 .no-meetings{
@@ -263,15 +303,15 @@ button, img{
     color: red;
 }
 
-/* ====== Meeting Activities ====== */
 
+/* ====== Meeting Activities ====== */
 .meeting-activities,
 .m-form{
     grid-column:  17 / span 5;
 }
 
-/* ====== Footer ====== */
 
+/* ====== Footer ====== */
 .footer{
     grid-column: 1 / -1;
     text-align: center;
@@ -281,8 +321,8 @@ button, img{
     border-top: .3rem solid #FFF;
 }
 
-/* ====== Meeting Form ====== */
 
+/* ====== Meeting Form ====== */
 .m-form form {
     width: 100%;
     height: 26rem;
@@ -318,10 +358,6 @@ button, img{
     border: 2px solid #000;
 }
 
-.f-buttons button:hover{
-   cursor: pointer;
-}
-
 .btn-submit{
     background-color: green;
     margin-right: .2rem;
@@ -337,8 +373,8 @@ button, img{
     background-color: maroon;
 }
 
-/* ====== Media Queries ====== */
 
+/* ====== Media Queries ====== */
 @media screen and (max-width: 468px) {
     body{
         font-size: 8px;
@@ -351,6 +387,7 @@ button, img{
         display: none;
     }
 }
+
 
 /* Extra small devices (phones, 600px and down) */
 @media screen and (max-width: 600px) {

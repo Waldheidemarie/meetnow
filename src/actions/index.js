@@ -3,7 +3,6 @@ import {
     SHOW_CATEGORY,
     FETCH_MEETINGS,
     CREATE_MEETING,
-    SHOW_MEETING,
     UPDATE_MEETING,
     DELETE_MEETING
 } from './contants';
@@ -33,13 +32,6 @@ export function createMeeting(newMeeting) {
     return {
         type: CREATE_MEETING,
         payload: {...newMeeting}
-    }
-}
-
-export function showMeeting(id) {
-    return {
-        type: SHOW_MEETING,
-        payload: id
     }
 }
 

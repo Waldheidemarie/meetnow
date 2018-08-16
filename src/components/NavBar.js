@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserTie } from '@fortawesome/free-solid-svg-icons';
 
@@ -14,7 +15,7 @@ class NavBar extends Component {
         console.log('Props in Navbar ', this.props);
         return (
             <nav className="navbar">
-                <div className="navbar-brand"><a href="#"><FontAwesomeIcon icon={faUserTie} /> | MeetNOW!</a></div>
+                <div className="navbar-brand"><Link to="/"><FontAwesomeIcon icon={faUserTie} /> | MeetNOW!</Link></div>
                 <button onClick={this.handleForm}>Create Meeting</button>
                 <ul className="navbar-ul">
                     <li><a href="#">Register</a></li>

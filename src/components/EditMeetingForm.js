@@ -5,41 +5,52 @@ import { updateMeeting } from "../actions";
 
 class EditMeetingForm extends Component {
 
-  state = {
-    id: '',
-    title: '',
-    hostName: '',
-    description: '',
-    category: '',
-    date: '',
-    venue: ''
+  constructor(props) {
+    super(props);
+
+    this.state = {
+        id: '',
+        title: '',
+        hostName: '',
+        description: '',
+        category: '',
+        date: '',
+        venue: ''
+    }
   }
 
   componentDidMount() {
-    let { currMeetingId } = this.props;
-    this.setState({ id: currMeetingId })
+    const meeting = this.props.meetings.filter(m => m.id === this.props.currMeetingId)[0];
+    let { title, hostName, description, category, date, venue } = meeting;
+    this.setState({
+        id: this.props.currMeetingId,
+        title,
+        hostName,
+        description,
+        category,
+        date,
+        venue
+      })
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps){
-    console.log('nextProps in EditForm', nextProps);
-  }
+  // UNSAFE_componentWillReceiveProps(nextProps){
+  //   console.log('nextProps in EditForm', nextProps);
+  // }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const timestamp = Date.now();
-    //const { id, title, hostName, description, category, date, venue } = this.state;
-    const updatedMeeting = Object.assign({}, this.state, timestamp);
-    // this.props.updateMeeting({
-    //   id,
-    //   title,
-    //   hostName,
-    //   description,
-    //   category,
-    //   date,
-    //   venue,
-    //   timestamp: Date.now()
-    // });
-    this.props.updateMeeting(updatedMeeting);
+    const { id, title, hostName, description, category, date, venue } = this.state;
+    this.props.updateMeeting({
+      id,
+      title,
+      hostName,
+      description,
+      category,
+      date,
+      venue,
+      timestamp: Date.now()
+    });
+
 
     //this.props.reset();
     this.props.formOps.hide();
@@ -58,9 +69,7 @@ class EditMeetingForm extends Component {
 
   render() {
     console.log('Props in EditMeetingForm', this.props);
-    const currMeeting = this.props.meetings.filter(m => m.id === this.props.currMeetingId)[0];
-    //const { title, hostName, description, category, date, venue } = this.props;
-    const { title, hostName, description, category, date, venue } = currMeeting;
+    const { title, hostName, description, category, date, venue } = this.state;
 
     return (
       <div className="m-form">
@@ -117,9 +126,7 @@ class EditMeetingForm extends Component {
 
 
 const mapStateToProps = (state) => {
-    return {
-      meetings: state.meetings
-    }
+    return state
 }
 
 export default connect(mapStateToProps, { updateMeeting })(EditMeetingForm);

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchMeetings, showMeeting, deleteMeeting } from '../actions';
+import { fetchMeetings, deleteMeeting } from '../actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFrown } from '@fortawesome/free-solid-svg-icons';
+import CategoriesList from './CategoriesList';
 import Meeting from './Meeting';
 
 class MeetingsList extends Component {
@@ -11,16 +12,21 @@ class MeetingsList extends Component {
         this.props.fetchMeetings();
     }
 
-
-  currMeeting = async (meetingId) => {
+    currMeeting = async (meetingId) => {
         console.log('currMeeting id', meetingId);
         await this.props.saveCurrMeeting(meetingId);
         this.props.formOps.display();
-  }
+    }
+
+    showMeeting = async (meetingId) => {
+        console.log('current meeting id in MeetingList', meetingId);
+        await this.props.saveCurrMeeting(meetingId);
+        this.props.history.push(`/meetings/${meetingId}`);
+    }
 
     handleDelete = (meetingToDeleteId) => {
-        this.props.deleteMeeting(meetingToDeleteId);
-  }
+            this.props.deleteMeeting(meetingToDeleteId);
+    }
 
     renderMeetings = (meetings) => {
         return Object.values(meetings).map(m => {
@@ -28,6 +34,7 @@ class MeetingsList extends Component {
                         key={m.id}
                         meeting={m}
                         currMeeting={this.currMeeting}
+                        showMeeting={this.showMeeting}
                         handleDelete={this.handleDelete}
                         />
         })
@@ -48,8 +55,13 @@ class MeetingsList extends Component {
 
         return (
             <div className="meetings-list">
-                <h4>Scheduled Meetings</h4>
-                { this.renderMeetings(meetings) }
+                <div className="m-list-categories">
+                    <CategoriesList />
+                </div>
+                <div className="m-list-items">
+                    <h4>Scheduled Meetings</h4>
+                    { this.renderMeetings(meetings) }
+                </div>
             </div>
         )
     }
@@ -62,5 +74,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { fetchMeetings, showMeeting, deleteMeeting }
+    { fetchMeetings, deleteMeeting }
 )(MeetingsList);

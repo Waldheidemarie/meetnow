@@ -3,7 +3,6 @@ import update from 'immutability-helper';
 import {
     FETCH_MEETINGS,
     CREATE_MEETING,
-    SHOW_MEETING,
     UPDATE_MEETING,
     DELETE_MEETING
 } from '../actions/contants';
