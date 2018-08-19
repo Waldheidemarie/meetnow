@@ -12,7 +12,11 @@ class CreateMeetingForm extends Component {
       description: '',
       category: '',
       date: '',
-      venue: ''
+      venue: '',
+      formError: { title: '', hostName: '' },
+      isTitleValid: false,
+      isHostNameValid: false,
+      isFormValid: false
   }
 
   handleSubmit = (e) => {
@@ -54,11 +58,11 @@ class CreateMeetingForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <div className="form-input">
             <label htmlFor="title">Title:</label><br />
-            <input type="text" name="title" value={title} onChange={this.handleInput} placeholder="Enter title" />
+            <input type="text" name="title" value={title} onChange={this.handleInput} placeholder="Enter title" required/>
           </div><br />
           <div className="form-input">
             <label htmlFor="hostName">Host:</label><br />
-            <input type="text" name="hostName" value={hostName} onChange={this.handleInput} placeholder="Who is hosting?" />
+            <input type="text" name="hostName" value={hostName} onChange={this.handleInput} placeholder="Who is hosting?" required/>
           </div><br />
           <div className="form-input">
             <label htmlFor="description">Description:</label><br />
@@ -66,7 +70,7 @@ class CreateMeetingForm extends Component {
           </div><br />
           <div className="form-input">
             <label htmlFor="category">Category:</label><br />
-            <select name="category" value={category} onChange={this.handleInput}>
+            <select name="category" value={category} onChange={this.handleInput} required>
                   <option />
                   <option value="science">Science & Tech</option>
                   <option value="business">Business</option>

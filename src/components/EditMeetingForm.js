@@ -15,7 +15,8 @@ class EditMeetingForm extends Component {
         description: '',
         category: '',
         date: '',
-        venue: ''
+        venue: '',
+        error: null
     }
   }
 
@@ -34,11 +35,8 @@ class EditMeetingForm extends Component {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps){
-      console.log('nextProps in EditForm', nextProps);
-      console.log('state props', this.state);
-
-      const { id, title, hostName, description, category, date, venue } = this.state;
-      const meeting = nextProps.meetings.filter(m => m.id === nextProps.currMeetingId)[0];
+    const { id, title, hostName, description, category, date, venue } = this.state;
+    const meeting = nextProps.meetings.filter(m => m.id === nextProps.currMeetingId)[0];
 
     if (id !== meeting.id) { this.setState({ id: meeting.id }) }
     if (title !== meeting.title) { this.setState({ title: meeting.title }) }
@@ -89,11 +87,12 @@ class EditMeetingForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <div className="form-input">
             <label htmlFor="title">Title:</label><br />
-            <input type="text" name="title" value={title} onChange={this.handleInput} placeholder="Enter title" />
+            <input type="text" name="title" value={title} onChange={this.handleInput} placeholder="Enter title" required/>
+            { }
           </div><br />
           <div className="form-input">
             <label htmlFor="hostName">Host:</label><br />
-            <input type="text" name="hostName" value={hostName} onChange={this.handleInput} placeholder="Who is hosting?" />
+            <input type="text" name="hostName" value={hostName} onChange={this.handleInput} placeholder="Who is hosting?" required/>
           </div><br />
           <div className="form-input">
             <label htmlFor="description">Description:</label><br />
@@ -101,7 +100,7 @@ class EditMeetingForm extends Component {
           </div><br />
           <div className="form-input">
             <label htmlFor="category">Category:</label><br />
-            <select name="category" value={category} onChange={this.handleInput}>
+            <select name="category" value={category} onChange={this.handleInput} required>
                   <option />
                   <option >Science & Tech</option>
                   <option >Business</option>
