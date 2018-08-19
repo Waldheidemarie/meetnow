@@ -22,6 +22,7 @@ class MeetingsList extends Component {
         console.log('current meeting id in MeetingList', meetingId);
         await this.props.saveCurrMeeting(meetingId);
         this.props.history.push(`/meetings/${meetingId}`);
+        this.props.formOps.hide();
     }
 
     handleDelete = (meetingToDeleteId) => {

@@ -33,9 +33,21 @@ class EditMeetingForm extends Component {
       })
   }
 
-  // UNSAFE_componentWillReceiveProps(nextProps){
-  //   console.log('nextProps in EditForm', nextProps);
-  // }
+  UNSAFE_componentWillReceiveProps(nextProps){
+      console.log('nextProps in EditForm', nextProps);
+      console.log('state props', this.state);
+
+      const { id, title, hostName, description, category, date, venue } = this.state;
+      const meeting = nextProps.meetings.filter(m => m.id === nextProps.currMeetingId)[0];
+
+    if (id !== meeting.id) { this.setState({ id: meeting.id }) }
+    if (title !== meeting.title) { this.setState({ title: meeting.title }) }
+    if (hostName !== meeting.hostName) { this.setState({ hostName: meeting.hostName }) }
+    if (description !== meeting.description) { this.setState({ description: meeting.description }) }
+    if (category !== meeting.category) { this.setState({ category: meeting.category }) }
+    if (date !== meeting.date) { this.setState({ date: meeting.date }) }
+    if (venue !== meeting.venue) { this.setState({ venue: meeting.venue}) }
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
