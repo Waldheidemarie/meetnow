@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import uuidv4 from 'uuid/v4';
 import { connect } from 'react-redux';
 import { createMeeting } from "../actions";
+import LocationSearchInput from './LocationSearchInput';
 
 
 class CreateMeetingForm extends Component {
@@ -93,6 +94,10 @@ class CreateMeetingForm extends Component {
           <div className="form-input">
             <label htmlFor="venue">Venue:</label><br />
             <input type="text" name="venue" value={venue} onChange={this.handleInput} placeholder="Where is it taking place?" />
+          </div><br />
+          <div className="form-input">
+            <label htmlFor="places">Places:</label><br />
+            <LocationSearchInput />
           </div><br />
           <div className="f-buttons">
             <button className="btn-submit" type="submit">Create</button>

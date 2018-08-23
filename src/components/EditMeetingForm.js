@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateMeeting } from "../actions";
+import LocationSearchInput from './LocationSearchInput';
 
 
 class EditMeetingForm extends Component {
@@ -123,6 +124,10 @@ class EditMeetingForm extends Component {
           <div className="form-input">
             <label htmlFor="venue">Venue:</label><br />
             <input type="text" name="venue" value={venue} onChange={this.handleInput} placeholder="Where is it taking place?" />
+          </div><br />
+            <div className="form-input">
+              <label htmlFor="places">Places:</label><br />
+              <LocationSearchInput />
           </div><br />
           <div className="f-buttons">
             <button className="btn-submit" type="submit">Update</button>

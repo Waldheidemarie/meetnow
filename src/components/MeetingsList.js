@@ -26,7 +26,10 @@ class MeetingsList extends Component {
     }
 
     handleDelete = (meetingToDeleteId) => {
-            this.props.deleteMeeting(meetingToDeleteId);
+        if (this.props.currMeetingId === meetingToDeleteId){
+            this.props.saveCurrMeeting('');
+        }
+        this.props.deleteMeeting(meetingToDeleteId);
     }
 
     renderMeetings = (meetings) => {

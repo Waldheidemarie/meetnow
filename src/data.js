@@ -145,3 +145,4 @@ export const getDefaultCategories = () => {
         { id: "c12", category: "Conferences" }
     ]
 }
+
