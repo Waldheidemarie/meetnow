@@ -40,7 +40,6 @@ class Meeting extends Component{
                 </ul>
 
                 <section className="m-text">
-                    <p>{meeting.description}</p>
                     <span className="b-view" onClick={() => showMeeting(meeting.id)}><FontAwesomeIcon icon={faFolderOpen} /></span>
                     <span className="b-edit" onClick={() => currMeeting(meeting.id)}><FontAwesomeIcon icon={faPencilAlt} /></span>
                     <span className="b-delete" onClick={() => this.submitDelete(meeting.id)}><FontAwesomeIcon icon={faTrash} /></span>

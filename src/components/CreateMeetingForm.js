@@ -14,15 +14,12 @@ class CreateMeetingForm extends Component {
       category: '',
       date: '',
       venue: '',
-      formError: { title: '', hostName: '' },
-      isTitleValid: false,
-      isHostNameValid: false,
-      isFormValid: false
+      venueLatLng: { lat: '', lng: '' }
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { title, hostName, description, category, date, venue } = this.state;
+    const { title, hostName, description, category, date, venue, venueLatLng } = this.state;
     this.props.createMeeting({
         id: uuidv4(),
         title,
@@ -31,6 +28,7 @@ class CreateMeetingForm extends Component {
         category,
         date,
         venue,
+        venueLatLng,
         timestamp: Date.now()
     });
 
@@ -49,13 +47,20 @@ class CreateMeetingForm extends Component {
     this.props.formOps.hide();
   }
 
+  handleVenue = (address, latLng) => {
+      this.setState({
+          venue: address,
+          venueLatLng: latLng
+      })
+  }
+
   render () {
     console.log('Props in CreateMeetingForm', this.props);
+    console.log('State in CreateMeetingForm', this.state);
     let { title, hostName, description, category, date, venue } = this.state;
 
     return (
       <div className="m-form">
-        <h4>+New Meeting</h4>
         <form onSubmit={this.handleSubmit}>
           <div className="form-input">
             <label htmlFor="title">Title:</label><br />
@@ -93,11 +98,7 @@ class CreateMeetingForm extends Component {
           </div><br />
           <div className="form-input">
             <label htmlFor="venue">Venue:</label><br />
-            <input type="text" name="venue" value={venue} onChange={this.handleInput} placeholder="Where is it taking place?" />
-          </div><br />
-          <div className="form-input">
-            <label htmlFor="places">Places:</label><br />
-            <LocationSearchInput />
+            <LocationSearchInput value={venue} handleVenue={this.handleVenue}/>
           </div><br />
           <div className="f-buttons">
             <button className="btn-submit" type="submit">Create</button>

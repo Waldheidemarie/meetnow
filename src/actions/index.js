@@ -2,6 +2,7 @@ import {
     FETCH_CATEGORIES,
     SHOW_CATEGORY,
     FETCH_MEETINGS,
+    SHOW_MEETING,
     CREATE_MEETING,
     UPDATE_MEETING,
     DELETE_MEETING
@@ -24,6 +25,13 @@ export function showCategory(category) {
 export function fetchMeetings() {
     return {
         type: FETCH_MEETINGS
+    }
+}
+
+export function showMeeting(meetingId) {
+    return {
+        type: SHOW_MEETING,
+        payload: meetingId
     }
 }
 

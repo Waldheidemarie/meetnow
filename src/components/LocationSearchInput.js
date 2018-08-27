@@ -5,7 +5,7 @@ class LocationSearchInput extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { address: '' };
+    this.state = {address: ''};
   }
 
   handleChange = (address) => {
@@ -15,14 +15,24 @@ class LocationSearchInput extends Component {
   handleSelect = (address) => {
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
-      .then(latLng => console.log('Success', latLng))
+      .then((latLng) => {
+          console.log('Success', latLng);
+          console.log('address selected: ', this.state.address);
+          this.props.handleVenue(this.state.address, latLng);
+        })
       .catch(error => console.error('Error', error));
   }
 
   render () {
-    const renderLocation = ({ getInputProps, getSuggestionItemProps, suggestions, loading, style }) => (
+    console.log('Props in LocationSearchInput: ', this.props);
+    const renderLocation = ({ getInputProps, getSuggestionItemProps, suggestions, loading }) => (
       <div>
-        <input {...getInputProps({ placeholder: 'search places ...' })} />
+        <input {...getInputProps({
+                    type:"text",
+                    name:"venue",
+                    placeholder: "search places ..."
+                })}
+        />
 
         <div className="autocomplete-dropdown-container">
 

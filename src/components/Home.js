@@ -2,7 +2,6 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 const Home = ({ history }) => {
-        console.log('Props in Home', this.props);
         return (
             <div className="home">
                 <div className="home-content">

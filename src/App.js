@@ -68,10 +68,11 @@ class App extends Component {
                                   formOps={this.formOps}
                                   saveCurrMeeting={this.saveCurrMeeting}/>}
                           />
-              <Route exact path='/meetings/:id' render={({ history }) =>
+              <Route exact path='/meetings/:id' render={({ history, location, match }) =>
                           <MeetingDetails
                                   history={history}
-                                  currMeetingId={currMeetingId}
+                                  location={location}
+                                  match={match}
                                   isFormOpen={isFormOpen}
                                   formOps={this.formOps}/>}
                           />
@@ -79,7 +80,7 @@ class App extends Component {
             {isFormOpen
               ? (currMeetingId
                     ? <EditMeetingForm isFormOpen={isFormOpen} formOps={this.formOps} currMeetingId={currMeetingId}/>
-                    : <CreateMeetingForm isFormOpen={isFormOpen} formOps={this.formOps} />
+                    : <CreateMeetingForm isFormOpen={isFormOpen} formOps={this.formOps} currMeetingId={currMeetingId}/>
                   )
               : <MeetingActivity />
             }
