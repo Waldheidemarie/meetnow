@@ -27,7 +27,7 @@ class MeetingsList extends Component {
 
     handleDelete = (meetingToDeleteId) => {
         if (this.props.currMeetingId === meetingToDeleteId){
-            this.props.saveCurrMeeting('');
+            this.props.saveCurrMeeting(null);
         }
         this.props.deleteMeeting(meetingToDeleteId);
     }
@@ -76,7 +76,4 @@ const mapStateToProps = state => {
     return state;
 }
 
-export default connect(
-    mapStateToProps,
-    { fetchMeetings, deleteMeeting }
-)(MeetingsList);
+export default connect(mapStateToProps,{ fetchMeetings, deleteMeeting })(MeetingsList);

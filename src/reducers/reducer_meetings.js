@@ -4,6 +4,7 @@ import {
     FETCH_MEETINGS,
     SHOW_MEETING,
     CREATE_MEETING,
+    EDIT_MEETING,
     UPDATE_MEETING,
     DELETE_MEETING
 } from '../actions/contants';
@@ -22,6 +23,11 @@ export default function (state = initialState, action){
                 ...state,
                     Object.assign({}, action.payload)
                 ];
+        case EDIT_MEETING:
+            return {
+                ...state,
+                    ...state.filter(m => m.id === action.payload)[0]
+            }
         case UPDATE_MEETING:
             return [
                 ...state.filter(m => m.id !== action.payload.updatedMeeting.id),

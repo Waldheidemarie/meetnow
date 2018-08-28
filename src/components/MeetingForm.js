@@ -1,104 +1,149 @@
 import React, { Component } from 'react';
+import uuidv4 from 'uuid/v4';
+import { connect } from 'react-redux';
+import { createMeeting, editMeeting, updateMeeting } from "../actions";
+import LocationSearchInput from './LocationSearchInput';
 
 
 class MeetingForm extends Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            id: '',
-            title: '',
-            date: '',
-            venue: '',
-            hostName: '',
-            hostPhotoURL: "https://randomuser.me/api/portraits/men/91.jpg"
-        } 
+    state = {
+        id: '',
+        title: '',
+        hostName: '',
+        description: '',
+        category: '',
+        date: '',
+        venue: '',
+        venueLatLng: { lat: '', lng: '' },
+        attendees: [],
+        timestamp: ''
     }
 
-    componentDidMount() {
-        if(this.props.currMeeting !== null){
-            const { id, title, date, venue, hostName } = this.props.currMeeting;
-            this.setState({ id, title, date, venue, hostName });
+    async componentDidMount() {
+        if(this.props.currMeetingId !== null){
+            await this.props.editMeeting(this.props.currMeetingId);
+            const { id, title, hostName, description, category, date, venue, venueLatLng, attendees, timestamp } = this.props.meetings;
+            this.setState({
+                id,
+                title,
+                hostName,
+                description,
+                category,
+                date,
+                venue,
+                venueLatLng,
+                attendees,
+                timestamp
+            });
         }
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        console.log('next props', nextProps);
-        if(nextProps.currMeeting === null){
-            this.setState({ id: '',title: '',date: '',venue: '',hostName: ''})
-        } else if(((this.props.currMeeting && nextProps.currMeeting) 
-                    && (this.props.currMeeting.id !== nextProps.currMeeting.id)) 
-                    || (!this.props.currMeeting && nextProps.currMeeting)){
-            let { id, title, date, venue, hostName } = nextProps.currMeeting;
-            this.setState({ id,title,date,venue,hostName });
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        if(this.props.currMeetingId !== null){
+            const { id, title, hostName, description, category, date, venue, venueLatLng, attendees, timestamp } = this.state;
+            this.props.updateMeeting({
+                id,
+                title,
+                hostName,
+                description,
+                category,
+                date,
+                venue,
+                venueLatLng,
+                attendees,
+                timestamp
+            });
+        }else if(this.props.currMeetingId === null){
+            const { title, hostName, description, category, date, venue, venueLatLng } = this.state;
+            this.props.createMeeting({
+                id: uuidv4(),
+                title,
+                hostName,
+                description,
+                category,
+                date,
+                venue,
+                venueLatLng,
+                timestamp: Date.now()
+            });
         }
+
+
+        //this.props.reset();
+        this.props.formOps.hide();
     }
 
-    handleChange = (e) => {
-        console.log('onchange', e.target.value);
-        e.preventDefault()
+    handleInput = (e) => {
+        console.log(e.target.value);
         this.setState({
             [e.target.name]: e.target.value
         })
     }
-    
-    handleSubmit = async (e) => {
-        console.log('new meeting', this.state);
-        e.preventDefault();
-        if(!this.state.id){
-            await this.props.updateMeetings({...this.state });
-            this.setState({ title: '',date: '',venue: '',hostName: ''});
-        }else{
-            let newMeeting = {...this.state};
-            await this.props.updateMeetings(newMeeting);
-            this.setState({ id: '', title: '', date: '', venue: '', hostName: '' });
-        }
+
+    handleForm = () => {
+        this.props.formOps.hide();
     }
 
-    render () {
+    handleVenue = (address, latLng) => {
+        this.setState({
+            venue: address,
+            venueLatLng: latLng
+        })
+    }
+
+    render() {
+        console.log('Props in MeetingForm', this.props);
+        console.log('State in MeetingForm', this.state);
+        let { title, hostName, description, category, date, venue } = this.state;
+
         return (
             <div className="m-form">
-                <h4>Add/Edit Meeting</h4>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-input">
                         <label htmlFor="title">Title:</label><br />
-                        <input 
-                            type="text" 
-                            name="title"
-                            value={this.state.title} 
-                            onChange={this.handleChange}
-                            placeholder="Enter title"/>
-                    </div><br />
-                    <div className="form-input">
-                        <label htmlFor="date">Date:</label><br />
-                        <input 
-                            type="date" 
-                            name="date"
-                            value={this.state.date}  
-                            onChange={this.handleChange}
-                            placeholder="date of meeting" />
-                    </div><br />
-                    <div className="form-input">
-                        <label htmlFor="venue">Venue:</label><br />
-                        <input 
-                            type="text" 
-                            name="venue"
-                            value={this.state.venue}  
-                            onChange={this.handleChange}
-                            placeholder="venue of meeting" />
+                        <input type="text" name="title" value={title} onChange={this.handleInput} placeholder="Enter title" required />
                     </div><br />
                     <div className="form-input">
                         <label htmlFor="hostName">Host:</label><br />
-                        <input 
-                            type="text" 
-                            name="hostName"
-                            value={this.state.hostName} 
-                            onChange={this.handleChange} 
-                            placeholder="Who is hosting?" />
+                        <input type="text" name="hostName" value={hostName} onChange={this.handleInput} placeholder="Who is hosting?" required />
+                    </div><br />
+                    <div className="form-input">
+                        <label htmlFor="description">Description:</label><br />
+                        <textarea type="text" name="description" rows="3" value={description} onChange={this.handleInput} placeholder="What is it about?" />
+                    </div><br />
+                    <div className="form-input">
+                        <label htmlFor="category">Category:</label><br />
+                        <select name="category" value={category} onChange={this.handleInput} required>
+                            <option />
+                            <option value="science">Science & Tech</option>
+                            <option value="business">Business</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="sports">Sports</option>
+                            <option value="fashion">Fashion</option>
+                            <option value="lifestyle">Lifestyle</option>
+                            <option value="volunteering">Volunteering</option>
+                            <option value="agegroups">Age Groups</option>
+                            <option value="health">Health</option>
+                            <option value="career">Career Fairs</option>
+                            <option value="research">Research Groups</option>
+                            <option value="conferences">Conferences</option>
+                        </select>
+                    </div><br />
+                    <div className="form-input">
+                        <label htmlFor="date">Date:</label><br />
+                        <input type="date" name="date" value={date} onChange={this.handleInput} />
+                    </div><br />
+                    <div className="form-input">
+                        <label htmlFor="venue">Venue:</label><br />
+                        <LocationSearchInput value={venue} handleVenue={this.handleVenue} />
                     </div><br />
                     <div className="f-buttons">
-                        <button className="btn-submit" type="submit">Submit</button>
-                        <button className="btn-cancel">Cancel</button>
+                        <button className="btn-submit" type="submit">Create</button>
+                        <button className="btn-reset" type="reset">Reset</button>
+                        <button className="btn-cancel" onClick={this.handleForm}>Cancel</button>
                     </div>
                 </form>
             </div>
@@ -106,4 +151,8 @@ class MeetingForm extends Component {
     }
 }
 
-export default MeetingForm;
+const mapStateToProps = (state) => {
+    return state;
+}
+
+export default connect(mapStateToProps, { createMeeting, editMeeting, updateMeeting })(MeetingForm);

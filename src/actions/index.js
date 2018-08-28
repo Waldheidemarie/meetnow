@@ -4,6 +4,7 @@ import {
     FETCH_MEETINGS,
     SHOW_MEETING,
     CREATE_MEETING,
+    EDIT_MEETING,
     UPDATE_MEETING,
     DELETE_MEETING
 } from './contants';
@@ -40,6 +41,13 @@ export function createMeeting(newMeeting) {
     return {
         type: CREATE_MEETING,
         payload: {...newMeeting}
+    }
+}
+
+export function editMeeting(meetingId) {
+    return {
+        type: EDIT_MEETING,
+        payload: meetingId
     }
 }
 

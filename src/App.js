@@ -5,21 +5,20 @@ import NavBar from './components/NavBar';
 import MeetingsList from './components/MeetingsList';
 import MeetingDetails from './components/MeetingDetails';
 import MeetingActivity from './components/MeetingActivity';
-import CreateMeetingForm from './components/CreateMeetingForm';
-import EditMeetingForm from './components/EditMeetingForm';
+import MeetingForm from './components/MeetingForm';
 import Footer from './components/Footer';
 import './App.css';
 
 class App extends Component {
 
   state = {
-      currMeetingId: '',
-      isFormOpen: false
+    currMeetingId: null,
+    isFormOpen: false
   }
 
   componentDidMount() {
-     this.setState({
-       isFormOpen: false
+    this.setState({
+      isFormOpen: false
     })
   }
 
@@ -33,13 +32,13 @@ class App extends Component {
   }
 
   hideForm = () => {
-    this.setState({ currMeetingId:'', isFormOpen: false });
+    this.setState({ currMeetingId: null, isFormOpen: false });
   }
 
   formOps = {
-      toggle: this.toggleForm,
-      display: this.displayForm,
-      hide: this.hideForm
+    toggle: this.toggleForm,
+    display: this.displayForm,
+    hide: this.hideForm
   }
 
   saveCurrMeeting = (id) => {
@@ -54,39 +53,36 @@ class App extends Component {
     return (
       <div>
         <Switch>
-            <Route exact path='/' render={() => <Home />}/>
+          <Route exact path='/' render={() => <Home />} />
         </Switch>
         <Route path='/(.+)' render={() => (
           <div className="App">
-            <NavBar isFormOpen={isFormOpen} formOps={this.formOps} saveCurrMeeting={this.saveCurrMeeting}/>
+            <NavBar isFormOpen={isFormOpen} formOps={this.formOps} saveCurrMeeting={this.saveCurrMeeting} />
             <Switch>
               <Route exact path='/meetings' render={({ history }) =>
-                          <MeetingsList
-                                  history={history}
-                                  currMeetingId={currMeetingId}
-                                  isFormOpen={isFormOpen}
-                                  formOps={this.formOps}
-                                  saveCurrMeeting={this.saveCurrMeeting}/>}
-                          />
+                <MeetingsList
+                  history={history}
+                  currMeetingId={currMeetingId}
+                  isFormOpen={isFormOpen}
+                  formOps={this.formOps}
+                  saveCurrMeeting={this.saveCurrMeeting} />}
+              />
               <Route exact path='/meetings/:id' render={({ history, location, match }) =>
-                          <MeetingDetails
-                                  history={history}
-                                  location={location}
-                                  match={match}
-                                  isFormOpen={isFormOpen}
-                                  formOps={this.formOps}/>}
-                          />
+                <MeetingDetails
+                  history={history}
+                  location={location}
+                  match={match}
+                  isFormOpen={isFormOpen}
+                  formOps={this.formOps} />}
+              />
             </Switch>
             {isFormOpen
-              ? (currMeetingId
-                    ? <EditMeetingForm isFormOpen={isFormOpen} formOps={this.formOps} currMeetingId={currMeetingId}/>
-                    : <CreateMeetingForm isFormOpen={isFormOpen} formOps={this.formOps} currMeetingId={currMeetingId}/>
-                  )
+              ? <MeetingForm isFormOpen={isFormOpen} formOps={this.formOps} currMeetingId={currMeetingId ? currMeetingId : null } />
               : <MeetingActivity />
             }
             <Footer />
           </div>
-        )}/>
+        )} />
       </div>
     );
   }

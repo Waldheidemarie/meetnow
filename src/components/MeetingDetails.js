@@ -10,6 +10,7 @@ import {
     faSpinner
 } from '@fortawesome/free-solid-svg-icons';
 import LocationMap from './LocationMap';
+import AttendeesList from './Attendees';
 
 class MeetingDetails extends Component {
 
@@ -19,13 +20,8 @@ class MeetingDetails extends Component {
     }
 
     render(){
-        if(!this.props){
-            <div><FontAwesomeIcon className={faSpinner} /></div>
-        }
-
         console.log('Props in MeetingDetails ', this.props);
-        const { id, title, hostName, description, category, date, venue, venueLatLng, attendees } = this.props.meetings;
-        const hostPhotoURL = "https://randomuser.me/api/portraits/thumb/men/43.jpg";
+        const { id, title, hostPhotoURL, hostName, description, category, date, venue, venueLatLng, attendees } = this.props.meetings;
         return (
             <div className="m-details">
                 <div className="m-details-banner">
@@ -35,11 +31,11 @@ class MeetingDetails extends Component {
                     </div>
                     <div className="details-title">
                         <h5>Tuesday, 25th August, 2018</h5>
-                        <h2>2019 Symposium on Girl Child Education</h2>
+                        <h2>{title}</h2>
                     </div>
                     <div className="details-host">
                         <img src={hostPhotoURL} alt="host" />
-                        <p>Hosted by: <strong>John Doe</strong></p>
+                        <p>Hosted by: <strong>{hostName}</strong></p>
                     </div>
                     <section className="m-text">
                         <span className="b-edit"><FontAwesomeIcon icon={faPencilAlt} /></span>
@@ -48,13 +44,7 @@ class MeetingDetails extends Component {
                 </div>
                 <div className="m-details-description">
                     <h4>What is it about?</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nemo atque repellat eos aut maxime, incidunt voluptatem, animi impedit, exercitationem nihil neque! Facere sint vel, ratione deleniti id est rem!
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, hic ducimus praesentium repellendus ipsum aspernatur architecto ut consequatur, velit dolorem cum placeat ab in maiores sint fugiat? Soluta, quos dolorem?
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis numquam quo atque. Saepe et neque ducimus laborum ea repellendus nisi, animi, cum optio, nesciunt velit! Obcaecati distinctio corrupti quod praesentium?
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nemo atque repellat eos aut maxime, incidunt voluptatem, animi impedit, exercitationem nihil neque! Facere sint vel, ratione deleniti id est rem!
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, hic ducimus praesentium repellendus ipsum aspernatur architecto ut consequatur, velit dolorem cum placeat ab in maiores sint fugiat? Soluta, quos dolorem?
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis numquam quo atque. Saepe et neque ducimus laborum ea repellendus nisi, animi, cum optio, nesciunt velit! Obcaecati distinctio corrupti quod praesentium?
-                    </p>
+                    <p>{description}</p>
                 </div>
                 <div className="m-details-venue">
                     <div className="m-details-location"></div>
@@ -62,7 +52,11 @@ class MeetingDetails extends Component {
                         <LocationMap venue={venue} venueLatLng={venueLatLng} />
                     </div>
                 </div>
-                <div className="m-details-attendees">attendees</div>
+                {attendees &&
+                    <div className="m-details-attendees">
+                        <AttendeesList attendees={attendees}/>
+                    </div>
+                }
                 <div className="m-details-comments">comments</div>
             </div>
         )
