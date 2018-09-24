@@ -15,7 +15,7 @@ class Meeting extends Component{
 
     render(){
         const { meeting, showMeeting, currMeeting } = this.props;
-        const hostPhotoURL = "https://randomuser.me/api/portraits/men/91.jpg";
+        const hostPhotoURL = require('../utils/images/default-user.png');
         console.log('meeting: ', meeting);
 
         return (

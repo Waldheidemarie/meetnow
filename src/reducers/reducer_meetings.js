@@ -8,16 +8,18 @@ import {
     UPDATE_MEETING,
     DELETE_MEETING
 } from '../actions/contants';
-import { getDefaultMeetings } from '../data';
+import * as data from '../data.json';
 
-const initialState = getDefaultMeetings();
+const initialState = data;
+
 
 export default function (state = initialState, action){
     switch(action.type){
         case FETCH_MEETINGS:
+            console.log('state in FETCH_MEETINGS reducer', state);
             return state;
         case SHOW_MEETING:
-            return state.filter(m => m.id === action.payload)[0];
+            return state.filter(m => m.id === action.payload)[0]
         case CREATE_MEETING:
             return [
                 ...state,

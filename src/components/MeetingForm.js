@@ -20,9 +20,9 @@ class MeetingForm extends Component {
         timestamp: ''
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         if(this.props.currMeetingId !== null){
-            await this.props.editMeeting(this.props.currMeetingId);
+            this.props.editMeeting(this.props.currMeetingId);
             const { id, title, hostName, description, category, date, venue, venueLatLng, attendees, timestamp } = this.props.meetings;
             this.setState({
                 id,

@@ -60,20 +60,15 @@ class App extends Component {
             <NavBar isFormOpen={isFormOpen} formOps={this.formOps} saveCurrMeeting={this.saveCurrMeeting} />
             <Switch>
               <Route exact path='/meetings' render={({ history }) =>
-                <MeetingsList
-                  history={history}
-                  currMeetingId={currMeetingId}
-                  isFormOpen={isFormOpen}
-                  formOps={this.formOps}
-                  saveCurrMeeting={this.saveCurrMeeting} />}
-              />
-              <Route exact path='/meetings/:id' render={({ history, location, match }) =>
-                <MeetingDetails
-                  history={history}
-                  location={location}
-                  match={match}
-                  isFormOpen={isFormOpen}
-                  formOps={this.formOps} />}
+                      <MeetingsList
+                        history={history}
+                        isFormOpen={isFormOpen}
+                        currMeetingId={currMeetingId}
+                        formOps={this.formOps}
+                        saveCurrMeeting={this.saveCurrMeeting} />}
+                    />
+              <Route exact path='/meetings/:id' render={({ match }) =>
+                      <MeetingDetails match={match} />}
               />
             </Switch>
             {isFormOpen

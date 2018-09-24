@@ -11,6 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import LocationMap from './LocationMap';
 import AttendeesList from './Attendees';
+import CommentsList from './Comments';
 
 class MeetingDetails extends Component {
 
@@ -21,7 +22,7 @@ class MeetingDetails extends Component {
 
     render(){
         console.log('Props in MeetingDetails ', this.props);
-        const { id, title, hostPhotoURL, hostName, description, category, date, venue, venueLatLng, attendees } = this.props.meetings;
+        const { id, title, hostPhotoURL, hostName, description, category, date, venue, venueLatLng, attendees, comments } = this.props.meetings;
         return (
             <div className="m-details">
                 <div className="m-details-banner">
@@ -31,7 +32,7 @@ class MeetingDetails extends Component {
                     </div>
                     <div className="details-title">
                         <h5>Tuesday, 25th August, 2018</h5>
-                        <h2>{title}</h2>
+                        <h2>{title || ""}</h2>
                     </div>
                     <div className="details-host">
                         <img src={hostPhotoURL} alt="host" />
@@ -54,10 +55,14 @@ class MeetingDetails extends Component {
                 </div>
                 {attendees &&
                     <div className="m-details-attendees">
-                        <AttendeesList attendees={attendees}/>
+                    <AttendeesList attendees={attendees}/>
                     </div>
                 }
-                <div className="m-details-comments">comments</div>
+                {comments &&
+                    <div className="m-details-comments">
+                    <CommentsList comments={comments} />
+                    </div>
+                }
             </div>
         )
     }

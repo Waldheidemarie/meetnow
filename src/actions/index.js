@@ -44,10 +44,10 @@ export function createMeeting(newMeeting) {
     }
 }
 
-export function editMeeting(meetingId) {
+export function editMeeting(meetingToEditId) {
     return {
         type: EDIT_MEETING,
-        payload: meetingId
+        payload: meetingToEditId
     }
 }
 

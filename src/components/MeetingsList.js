@@ -8,9 +8,12 @@ import Meeting from './Meeting';
 
 class MeetingsList extends Component {
 
-    componentDidMount() {
+
+    componentDidMount = () => {
+        console.log('MeetingsList did mount');
         this.props.fetchMeetings();
     }
+
 
     currMeeting = async (meetingId) => {
         console.log('currMeeting id', meetingId);
@@ -62,6 +65,7 @@ class MeetingsList extends Component {
                 <div className="m-list-categories">
                     <CategoriesList />
                 </div>
+
                 <div className="m-list-items">
                     <h4>Scheduled Meetings</h4>
                     { this.renderMeetings(meetings) }

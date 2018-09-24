@@ -217,8 +217,9 @@ button:hover{
 
 .m-time{
     grid-column: 1 / -1;
-    padding: .7rem 0 .7rem 0.7rem;
+    padding: .3rem 0 .7rem 0.7rem;
     border-top: .5px solid #DDD;
+    margin-top:.5rem;
     border-bottom: .5px solid #DDD;
     color: #AAA;
 }
@@ -333,13 +334,76 @@ button:hover{
 }
 
 
-/* ====== Meeting Details View ====== */
+/* ====== Meeting Form ====== */
+.m-form{
+    margin-top: 2rem;
+}
 
+.m-form form{
+    width: 18rem;
+    height: 26.5rem;
+    padding: 1rem;
+    border-radius: .2rem;
+    background-color: #FFF;
+    border: 1.5px solid #DDD;
+    margin-bottom: 2rem;
+    position: fixed;
+    z-index: 99;
+}
+
+.form-input input,
+.form-input textarea,
+.form-input select{
+    width: 100%;
+    height: 1.5rem;
+    margin-top: .5rem;
+    border: none;
+    border-bottom: 1px solid #DDD;
+    overflow: hidden;
+}
+
+.form-input input:focus,
+.form-input textarea:focus,
+.form-input select:focus{
+    outline: none;
+    border-bottom: 2px solid #DDD;
+}
+
+.f-buttons button{
+    width: 3.5rem;
+    height: 2rem;
+    color: #FFF;
+    border-radius: .5rem;
+}
+
+.btn-submit{
+    background-color: green;
+    margin-right: .2rem;
+}
+
+.btn-reset{
+    background-color: skyblue;
+    color: #000 !important;
+    margin-right: .2rem;
+}
+
+.btn-cancel{
+    background-color: maroon;
+}
+
+.autocomplete-dropdown-container{
+    position: absolute;
+    z-index: 99;
+    background-color: #FFF;
+}
+
+
+/* ====== Meeting Details View ====== */
 .m-details {
     grid-column: 4 / span 12;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 12rem 20rem 35rem 25rem auto;
+    grid-template-rows: 12rem 20rem 35rem 22rem auto;
 }
 
 .m-details-banner{
@@ -437,80 +501,58 @@ button:hover{
     grid-row: 5 / span 1;
 }
 
-
-
-/* ====== Footer ====== */
-.footer{
-    grid-column: 1 / -1;
-    text-align: center;
-    opacity: 0.8;
-    background-color: #263B30;
-    color: #FFF;
-    border-top: .3rem solid #FFF;
-}
-
-
-/* ====== Meeting Form ====== */
-.m-form{
-    margin-top: 2rem;
-}
-
-.m-form form{
-    width: 18rem;
-    height: 26.5rem;
-    padding: 1rem;
-    border-radius: .2rem;
-    background-color: #FFF;
-    border: 1.5px solid #DDD;
-    margin-bottom: 2rem;
-    position: fixed;
-    z-index: 99;
-}
-
-.form-input input,
-.form-input textarea,
-.form-input select{
+/* ====== Comments ====== */
+.comments-list{
     width: 100%;
-    height: 1.5rem;
-    margin-top: .5rem;
+}
+
+.comments-list ul{
+    list-style: none;
+}
+
+.comments-list li{
+    width: 100%;
+    height: 6rem;
+    box-sizing: border-box;
+    padding: .8rem;
+    border-radius: .3rem;
+    background-color: #FFF;
+    margin-bottom: .5px;
+}
+
+.comments-list-item{
+    margin-bottom: 0;
+}
+
+.comments-list-item button{
     border: none;
-    border-bottom: 1px solid #DDD;
+    color: blue;
+    font-weight: bold;
+    margin-left: 2.6rem;
+}
+
+.c-form{
+    padding: 0;
+    margin: 0;
+}
+.parent-comment img{
+    float: left;
+    width: 2rem;
+    height: 2rem;
+    margin: .5rem 1rem .5rem 0;
+}
+
+.c-form input{
+    width: 85%;
+    height: 2.5rem;
+    margin-top: .8rem;
+    border: none;
     overflow: hidden;
 }
 
-.form-input input:focus,
-.form-input textarea:focus,
-.form-input select:focus{
+.c-form input:focus{
     outline: none;
     border-bottom: 2px solid #DDD;
-}
-
-.f-buttons button{
-    width: 3.5rem;
-    height: 2rem;
-    color: #FFF;
-    border-radius: .5rem;
-}
-
-.btn-submit{
-    background-color: green;
-    margin-right: .2rem;
-}
-
-.btn-reset{
-    background-color: skyblue;
-    color: #000 !important;
-    margin-right: .2rem;
-}
-
-.btn-cancel{
-    background-color: maroon;
-}
-
-.autocomplete-dropdown-container{
-    position: absolute;
-    z-index: 99;
-    background-color: #FFF;
 }
 
 /* ====== Meeting Attendees ====== */
@@ -527,6 +569,7 @@ button:hover{
     box-sizing: border-box;
     background-color: #FFF;
     border-radius: .8rem;
+    border: .5px solid #DDD;
     padding: 1.5rem;
     text-align:center;
     margin-right: 1rem;
@@ -541,6 +584,17 @@ button:hover{
 .attendee-item img{
     border-radius: 50%;
     margin-bottom: .5rem;
+}
+
+
+/* ====== Footer ====== */
+.footer{
+    grid-column: 1 / -1;
+    text-align: center;
+    opacity: 0.8;
+    background-color: #263B30;
+    color: #FFF;
+    border-top: .3rem solid #FFF;
 }
 
 

@@ -67,15 +67,10 @@ class App extends Component {
                                   isFormOpen={isFormOpen}
                                   formOps={this.formOps}
                                   saveCurrMeeting={this.saveCurrMeeting}/>}
-                          />
-              <Route exact path='/meetings/:id' render={({ history, location, match }) =>
-                          <MeetingDetails
-                                  history={history}
-                                  location={location}
-                                  match={match}
-                                  isFormOpen={isFormOpen}
-                                  formOps={this.formOps}/>}
-                          />
+              />
+              <Route exact path='/meetings/:id' render={({ match }) =>
+                          <MeetingDetails match={match} /> }
+              />
             </Switch>
             {isFormOpen
               ? (currMeetingId
