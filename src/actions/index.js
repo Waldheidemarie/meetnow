@@ -11,57 +11,80 @@ import {
 
 
 export function fetchCategories(){
-    return {
-        type: FETCH_CATEGORIES
+    return (dispatch, getState) => {
+        // asyn db call operations will be here ...
+        dispatch({
+            type: FETCH_CATEGORIES
+        })
     }
 }
 
 export function showCategory(category) {
-    return {
-        type: SHOW_CATEGORY,
-        payload: category
+    return (dispatch, getState) => {
+        // asyn db call operations will be here ...
+        dispatch({
+            type: SHOW_CATEGORY,
+            payload: category
+        })
     }
 }
 
 export function fetchMeetings() {
-    return {
-        type: FETCH_MEETINGS
+    return (dispatch, getState) => {
+        // asyn db call operations will be here ...
+        //let allMeetings = getState().meetings
+        dispatch({
+            type: FETCH_MEETINGS
+        })
     }
 }
 
 export function showMeeting(meetingId) {
-    return {
-        type: SHOW_MEETING,
-        payload: meetingId
+    return (dispatch, getState) => {
+        // asyn db call operations will be here ...
+        dispatch({
+            type: SHOW_MEETING,
+            payload: meetingId
+        })
     }
 }
 
 export function createMeeting(newMeeting) {
-    console.log('values in create action', newMeeting)
-    return {
-        type: CREATE_MEETING,
-        payload: {...newMeeting}
+    return (dispatch, getState) => {
+        // asyn db call operations will be here ...
+        dispatch({
+            type: CREATE_MEETING,
+            payload: {...newMeeting}
+        })
     }
 }
 
-export function editMeeting(meetingToEditId) {
-    return {
-        type: EDIT_MEETING,
-        payload: meetingToEditId
+export function editMeeting(meetingId) {
+    return (dispatch, getState) => {
+        // asyn db call operations will be here ...
+        dispatch({
+            type: EDIT_MEETING,
+            payload: meetingId
+        })
     }
 }
 
 export function updateMeeting(updatedMeeting) {
-    console.log('values update actions', updatedMeeting);
-    return {
-        type: UPDATE_MEETING,
-        payload: { updatedMeeting }
+    return (dispatch, getState) => {
+        // asyn db call operations will be here ...
+        dispatch({
+            type: UPDATE_MEETING,
+            payload: { updatedMeeting }
+        })
     }
 }
 
-export function deleteMeeting(meetingToDeleteId) {
-    return {
-        type: DELETE_MEETING,
-        payload: meetingToDeleteId
+export function deleteMeeting(id) {
+    return (dispatch, getState) => {
+        // asyn db call operations will be here ...
+        dispatch({
+            type: DELETE_MEETING,
+            payload: id
+        })
     }
 }

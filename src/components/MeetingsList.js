@@ -10,45 +10,19 @@ class MeetingsList extends Component {
 
 
     componentDidMount = () => {
-        console.log('MeetingsList did mount');
+        console.log('MeetingsList mounted');
         this.props.fetchMeetings();
     }
 
-
-    currMeeting = async (meetingId) => {
-        console.log('currMeeting id', meetingId);
-        await this.props.saveCurrMeeting(meetingId);
-        this.props.formOps.display();
+    handleDelete = (meetingId) => {
+        console.log('id to delete in handleDelete', meetingId)
+        this.props.deleteMeeting(meetingId);
     }
 
-    showMeeting = async (meetingId) => {
-        console.log('current meeting id in MeetingList', meetingId);
-        await this.props.saveCurrMeeting(meetingId);
-        this.props.history.push(`/meetings/${meetingId}`);
-        this.props.formOps.hide();
-    }
-
-    handleDelete = (meetingToDeleteId) => {
-        if (this.props.currMeetingId === meetingToDeleteId){
-            this.props.saveCurrMeeting(null);
-        }
-        this.props.deleteMeeting(meetingToDeleteId);
-    }
-
-    renderMeetings = (meetings) => {
-        return Object.values(meetings).map(m => {
-            return <Meeting
-                        key={m.id}
-                        meeting={m}
-                        currMeeting={this.currMeeting}
-                        showMeeting={this.showMeeting}
-                        handleDelete={this.handleDelete}
-                        />
-        })
-    }
 
     render () {
-        if(this.props.meetings.length === 0){
+
+        if(!this.props.meetings){
             return <div className="no-meetings">
                         <FontAwesomeIcon icon={faFrown} style={{"font-size": "5rem", "color": "orange" }}/>
                         <h4>No Scheduled Meetings Found...</h4>
@@ -57,8 +31,7 @@ class MeetingsList extends Component {
                     </div>
         }
 
-        const { meetings } = this.props;
-        console.log('Props in MeetingsList',this.props);
+        console.log('Props in MeetingsList', this.props);
 
         return (
             <div className="meetings-list">
@@ -68,7 +41,14 @@ class MeetingsList extends Component {
 
                 <div className="m-list-items">
                     <h4>Scheduled Meetings</h4>
-                    { this.renderMeetings(meetings) }
+                    {this.props.meetings && this.props.meetings.map(m => {
+                        return <Meeting
+                            key={m.id}
+                            meeting={m}
+                            history={this.props.history}
+                            handleDelete={this.handleDelete}
+                        />
+                    })}
                 </div>
             </div>
         )
@@ -77,7 +57,17 @@ class MeetingsList extends Component {
 
 
 const mapStateToProps = state => {
-    return state;
+    console.log('state in meetingList mapStateToProps', state)
+    return {
+        meetings: state.meetings.meetings
+    }
 }
 
-export default connect(mapStateToProps,{ fetchMeetings, deleteMeeting })(MeetingsList);
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         fetchMeetings: () => dispatch(fetchMeetings()),
+//         deleteMeeting: (id) => dispatch(deleteMeeting(id))
+//     }
+// }
+
+export default connect(mapStateToProps, { fetchMeetings, deleteMeeting })(MeetingsList);

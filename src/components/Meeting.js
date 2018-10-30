@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faClock,
         faMapMarkerAlt,
@@ -9,12 +10,8 @@ import {faClock,
 
 class Meeting extends Component{
 
-    submitDelete = (meetingToDeleteId) => {
-        this.props.handleDelete(meetingToDeleteId);
-    }
-
-    render(){
-        const { meeting, showMeeting, currMeeting } = this.props;
+     render(){
+        const { meeting } = this.props;
         const hostPhotoURL = require('../utils/images/default-user.png');
         console.log('meeting: ', meeting);
 
@@ -33,16 +30,10 @@ class Meeting extends Component{
                     <span><FontAwesomeIcon icon={faClock} />  {meeting.date}</span>
                     <span><FontAwesomeIcon icon={faMapMarkerAlt} />  {meeting.venue}</span>
                 </section>
-                <ul className="m-attendee">
-                    {meeting.attendees && meeting.attendees.map(attendee => {
-                        return <li key={attendee.id}><img src={attendee.photoURL} alt={attendee.name} /></li>
-                    })}
-                </ul>
-
                 <section className="m-text">
-                    <span className="b-view" onClick={() => showMeeting(meeting.id)}><FontAwesomeIcon icon={faFolderOpen} /></span>
-                    <span className="b-edit" onClick={() => currMeeting(meeting.id)}><FontAwesomeIcon icon={faPencilAlt} /></span>
-                    <span className="b-delete" onClick={() => this.submitDelete(meeting.id)}><FontAwesomeIcon icon={faTrash} /></span>
+                    <Link to={`/meetings/${meeting.id}`}><FontAwesomeIcon icon={faFolderOpen} /></Link>
+                    <Link to='/editMeeting'><FontAwesomeIcon icon={faPencilAlt} /></Link>
+                    <span onClick={() => this.props.handleDelete(meeting.id)}><FontAwesomeIcon icon={faTrash} /></span>
                 </section>
             </div>
         )

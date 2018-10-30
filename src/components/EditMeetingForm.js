@@ -22,8 +22,8 @@ class EditMeetingForm extends Component {
   }
 
   componentDidMount() {
-    const meeting = this.props.meetings.filter(m => m.id === this.props.currMeetingId)[0];
-    let { title, hostName, description, category, date, venue } = meeting;
+    //const meeting = this.props.meetings.filter(m => m.id === this.props.currMeetingId)[0];
+    let { title, hostName, description, category, date, venue } = this.props.meeting;
     this.setState({
         id: this.props.currMeetingId,
         title,
@@ -142,7 +142,9 @@ class EditMeetingForm extends Component {
 
 
 const mapStateToProps = (state) => {
-    return state
+    return {
+      meeting: state.meetings
+    }
 }
 
 export default connect(mapStateToProps, { updateMeeting })(EditMeetingForm);

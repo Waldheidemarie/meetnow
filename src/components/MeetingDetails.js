@@ -21,8 +21,8 @@ class MeetingDetails extends Component {
     }
 
     render(){
-        console.log('Props in MeetingDetails ', this.props);
-        const { id, title, hostPhotoURL, hostName, description, category, date, venue, venueLatLng, attendees, comments } = this.props.meetings;
+        console.log('Props in MeetingDetails ', this.props.meeting);
+        const { id, title, hostPhotoURL, hostName, description, category, date, venue, venueLatLng, attendees, comments } = this.props.meeting;
         return (
             <div className="m-details">
                 <div className="m-details-banner">
@@ -69,7 +69,9 @@ class MeetingDetails extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return state;
+    return {
+        meeting: state.meetings
+    };
 }
 
 export default connect(mapStateToProps, { showMeeting })(MeetingDetails);

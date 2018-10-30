@@ -183,14 +183,14 @@ button:hover{
 
 .meeting{
     width: 98.5%;
-    height: 14rem;
+    height: 11rem;
     border-radius: .2rem;
     margin-bottom: .7rem;
     background-color: #FFF;
     border: 1.5px solid #DDD;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 6rem 2rem 4rem;
+    grid-template-rows: 6rem 2rem 2rem;
 }
 
 .m-title{

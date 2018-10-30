@@ -12,77 +12,20 @@ import './App.css';
 
 class App extends Component {
 
-  state = {
-      currMeetingId: '',
-      isFormOpen: false
-  }
-
-  componentDidMount() {
-     this.setState({
-       isFormOpen: false
-    })
-  }
-
-  toggleForm = () => {
-    let { isFormOpen } = this.state;
-    this.setState({ isFormOpen: isFormOpen === true ? false : true });
-  }
-
-  displayForm = () => {
-    this.setState({ isFormOpen: true });
-  }
-
-  hideForm = () => {
-    this.setState({ currMeetingId:'', isFormOpen: false });
-  }
-
-  formOps = {
-      toggle: this.toggleForm,
-      display: this.displayForm,
-      hide: this.hideForm
-  }
-
-  saveCurrMeeting = (id) => {
-    console.log('currMeeting id', id);
-    this.setState({ currMeetingId: id });
-  }
-
-
   render() {
-    const { isFormOpen, currMeetingId } = this.state;
-
-    return (
-      <div>
-        <Switch>
-            <Route exact path='/' render={() => <Home />}/>
-        </Switch>
-        <Route path='/(.+)' render={() => (
-          <div className="App">
-            <NavBar isFormOpen={isFormOpen} formOps={this.formOps} saveCurrMeeting={this.saveCurrMeeting}/>
+     return (
+        <div className="App">
+            <NavBar />
             <Switch>
-              <Route exact path='/meetings' render={({ history }) =>
-                          <MeetingsList
-                                  history={history}
-                                  currMeetingId={currMeetingId}
-                                  isFormOpen={isFormOpen}
-                                  formOps={this.formOps}
-                                  saveCurrMeeting={this.saveCurrMeeting}/>}
-              />
-              <Route exact path='/meetings/:id' render={({ match }) =>
-                          <MeetingDetails match={match} /> }
-              />
+              <Route  exact path='/' component={Home} />
+              <Route  exact path='/meetings' component={MeetingsList} />
+              <Route  exact path='/meetings/:id' component={MeetingDetails}/>
+              <Route  exact path='/createMeeting' component={CreateMeetingForm} />
+              <Route  exact path='/editMeeting' component={EditMeetingForm} />
             </Switch>
-            {isFormOpen
-              ? (currMeetingId
-                    ? <EditMeetingForm isFormOpen={isFormOpen} formOps={this.formOps} currMeetingId={currMeetingId}/>
-                    : <CreateMeetingForm isFormOpen={isFormOpen} formOps={this.formOps} currMeetingId={currMeetingId}/>
-                  )
-              : <MeetingActivity />
-            }
+            <MeetingActivity />
             <Footer />
           </div>
-        )}/>
-      </div>
     );
   }
 }
