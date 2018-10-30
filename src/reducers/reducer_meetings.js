@@ -106,20 +106,15 @@ const initialState = {
 export default function (state = initialState, action){
     switch(action.type){
         case FETCH_MEETINGS:
-            console.log('state in FETCH_MEETINGS', state)
             return {...state, ...state.meetings}
         case SHOW_MEETING:
-            console.log('state in SHOW_MEETING', state)
             return {
                 ...state,
                     ...state.meetings.filter(m => m.id === action.payload)[0]
             }
         case CREATE_MEETING:
-            console.log('state in CREATE_MEETING', state)
-            // return [
-            //     ...state,
-            //         Object.assign({}, state.meetings, action.payload)
-            // ];
+            let newMeeting = action.payload
+            return update(state, { meetings: { $splice: [[0,0,newMeeting]] } })
         case EDIT_MEETING:
             console.log('state in EDIT_MEETING', state)
             // return {
@@ -137,7 +132,6 @@ export default function (state = initialState, action){
             //             )
             // ];
         case DELETE_MEETING:
-            console.log('state in DELETE_MEETING', state)
             const mIndex = state.meetings.findIndex(m => m.id === action.payload)
             return update(state, {meetings: {$splice: [ [mIndex, 1] ]}})
         default:

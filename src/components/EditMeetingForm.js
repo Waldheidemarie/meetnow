@@ -64,7 +64,7 @@ class EditMeetingForm extends Component {
 
 
     //this.props.reset();
-    this.props.formOps.hide();
+    this.props.history.push('/meetings');
   }
 
   handleInput = (e) => {

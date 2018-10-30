@@ -33,7 +33,7 @@ class CreateMeetingForm extends Component {
     });
 
     //this.props.reset();
-    this.props.formOps.hide();
+    this.props.history.push('/meetings');
   }
 
   handleInput = (e) => {
@@ -41,10 +41,6 @@ class CreateMeetingForm extends Component {
     this.setState({
         [e.target.name] : e.target.value
     })
-  }
-
-  handleForm = () => {
-    this.props.formOps.hide();
   }
 
   handleVenue = (address, latLng) => {
