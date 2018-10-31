@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchMeetings, deleteMeeting } from '../actions';
+import { fetchMeetings, editMeeting, deleteMeeting } from '../actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFrown } from '@fortawesome/free-solid-svg-icons';
 import CategoriesList from './CategoriesList';
@@ -17,6 +17,12 @@ class MeetingsList extends Component {
     handleDelete = (meetingId) => {
         console.log('id to delete in handleDelete', meetingId)
         this.props.deleteMeeting(meetingId);
+    }
+
+    handleEdit = async (meetingId) => {
+        console.log('id to edit in handleEdit', meetingId)
+        await this.props.editMeeting(meetingId);
+        this.props.history.push(`/editMeeting/${meetingId}`);
     }
 
 
@@ -46,6 +52,7 @@ class MeetingsList extends Component {
                             key={m.id}
                             meeting={m}
                             history={this.props.history}
+                            handleEdit={this.handleEdit}
                             handleDelete={this.handleDelete}
                         />
                     })}
@@ -70,4 +77,4 @@ const mapStateToProps = state => {
 //     }
 // }
 
-export default connect(mapStateToProps, { fetchMeetings, deleteMeeting })(MeetingsList);
+export default connect(mapStateToProps, { fetchMeetings, editMeeting, deleteMeeting })(MeetingsList);

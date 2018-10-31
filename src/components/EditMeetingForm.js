@@ -13,6 +13,7 @@ class EditMeetingForm extends Component {
         id: '',
         title: '',
         hostName: '',
+        hostPhotoURL: '',
         description: '',
         category: '',
         date: '',
@@ -22,12 +23,14 @@ class EditMeetingForm extends Component {
   }
 
   componentDidMount() {
-    //const meeting = this.props.meetings.filter(m => m.id === this.props.currMeetingId)[0];
-    let { title, hostName, description, category, date, venue } = this.props.meeting;
+    const { id } = this.props.location.state;
+    const meeting = this.props.meeting.meetings.filter(m => m.id === id)[0];
+    let { title, hostName, hostPhotoURL, description, category, date, venue } = meeting;
     this.setState({
-        id: this.props.currMeetingId,
+        id,
         title,
         hostName,
+        hostPhotoURL,
         description,
         category,
         date,
@@ -35,26 +38,14 @@ class EditMeetingForm extends Component {
       })
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps){
-    const { id, title, hostName, description, category, date, venue } = this.state;
-    const meeting = nextProps.meetings.filter(m => m.id === nextProps.currMeetingId)[0];
-
-    if (id !== meeting.id) { this.setState({ id: meeting.id }) }
-    if (title !== meeting.title) { this.setState({ title: meeting.title }) }
-    if (hostName !== meeting.hostName) { this.setState({ hostName: meeting.hostName }) }
-    if (description !== meeting.description) { this.setState({ description: meeting.description }) }
-    if (category !== meeting.category) { this.setState({ category: meeting.category }) }
-    if (date !== meeting.date) { this.setState({ date: meeting.date }) }
-    if (venue !== meeting.venue) { this.setState({ venue: meeting.venue}) }
-  }
-
   handleSubmit = (e) => {
     e.preventDefault();
-    const { id, title, hostName, description, category, date, venue } = this.state;
+    const { id, title, hostName, hostPhotoURL, description, category, date, venue } = this.state;
     this.props.updateMeeting({
       id,
       title,
       hostName,
+      hostPhotoURL,
       description,
       category,
       date,
@@ -74,17 +65,12 @@ class EditMeetingForm extends Component {
     })
   }
 
-  handleForm = () => {
-    this.props.formOps.hide();
-  }
-
   render() {
     console.log('Props in EditMeetingForm', this.props);
     const { title, hostName, description, category, date, venue } = this.state;
 
     return (
       <div className="m-form">
-        <h4>+New Meeting</h4>
         <form onSubmit={this.handleSubmit}>
           <div className="form-input">
             <label htmlFor="title">Title:</label><br />

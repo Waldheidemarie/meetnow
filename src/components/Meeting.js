@@ -32,7 +32,10 @@ class Meeting extends Component{
                 </section>
                 <section className="m-text">
                     <Link to={`/meetings/${meeting.id}`}><FontAwesomeIcon icon={faFolderOpen} /></Link>
-                    <Link to='/editMeeting'><FontAwesomeIcon icon={faPencilAlt} /></Link>
+                    <Link to={{
+                            pathname: '/editmeeting',
+                            state: { id: meeting.id }
+                        }}><FontAwesomeIcon icon={faPencilAlt} /></Link>
                     <span onClick={() => this.props.handleDelete(meeting.id)}><FontAwesomeIcon icon={faTrash} /></span>
                 </section>
             </div>

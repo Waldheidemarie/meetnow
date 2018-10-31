@@ -4,7 +4,6 @@ import {
     FETCH_MEETINGS,
     SHOW_MEETING,
     CREATE_MEETING,
-    EDIT_MEETING,
     UPDATE_MEETING,
     DELETE_MEETING
 } from '../actions/contants';
@@ -108,32 +107,17 @@ export default function (state = initialState, action){
         case FETCH_MEETINGS:
             return {...state, ...state.meetings}
         case SHOW_MEETING:
-            return {
-                ...state,
-                    ...state.meetings.filter(m => m.id === action.payload)[0]
-            }
+            return { ...state, ...state.meetings.filter(m => m.id === action.payload)[0] }
         case CREATE_MEETING:
             let newMeeting = action.payload
             return update(state, { meetings: { $splice: [[0,0,newMeeting]] } })
-        case EDIT_MEETING:
-            console.log('state in EDIT_MEETING', state)
-            // return {
-            //     ...state,
-            //         ...state.meetings.filter(m => m.id === action.payload)[0]
-            // }
         case UPDATE_MEETING:
-            console.log('state in UPDATE_MEETING', state)
-            // return [
-            //     ...state.meetings.filter(m => m.id !== action.payload.updatedMeeting.id),
-            //         Object.assign(
-            //                 {},
-            //                 {...state.meetings.filter(m => m.id === action.payload.updatedMeeting.id)[0]},
-            //                 action.payload.updatedMeeting
-            //             )
-            // ];
+            let updatedMeeting = action.payload.updatedMeeting;
+            const uIndex = state.meetings.findIndex(um => um.id === updatedMeeting.id)
+            return update(state, { meetings: { [uIndex]: {$set: updatedMeeting } }})
         case DELETE_MEETING:
-            const mIndex = state.meetings.findIndex(m => m.id === action.payload)
-            return update(state, {meetings: {$splice: [ [mIndex, 1] ]}})
+            const dIndex = state.meetings.findIndex(m => m.id === action.payload)
+            return update(state, {meetings: {$splice: [ [dIndex, 1] ]}})
         default:
             return state;
     }

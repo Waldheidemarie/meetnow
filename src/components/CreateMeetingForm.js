@@ -29,7 +29,8 @@ class CreateMeetingForm extends Component {
         date,
         venue,
         venueLatLng,
-        timestamp: Date.now()
+        timestamp: Date.now(),
+        hostPhotoURL: require('../utils/images/default-user.png')
     });
 
     //this.props.reset();
